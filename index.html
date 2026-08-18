@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hirely — Global Business Consultancy</title>
+  <meta name="description"
+    content="Hirely Consultants advises boards, founders and Fortune 500 leaders across 32 countries — strategy, executive search, cross-border recruitment, digital & AI transformation, organizational design. New York · London · Dubai · Singapore." />
+  <meta name="theme-color" content="#F5F0E6" />
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230C1B33'/%3E%3Cpath d='M20 14v36M44 14v36M20 32h24' stroke='%232E6BFF' stroke-width='6' stroke-linecap='round'/%3E%3Ccircle cx='44' cy='14' r='5' fill='%233ED3F0'/%3E%3C/svg%3E" />
+
+  <!-- Theme State Initialization -->
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('hirely-theme');
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      } catch (err) { }
+    })();
+  </script>
+
+  <!-- Typography: Fraunces & Manrope & IBM Plex Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@400..800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS Framework CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bg: 'var(--bg)',
+            'bg-2': 'var(--bg-2)',
+            surface: 'var(--surface)',
+            'surface-2': 'var(--surface-2)',
+            ink: {
+              DEFAULT: 'var(--ink)',
+              soft: 'var(--ink-2)',
+              muted: 'var(--ink-3)'
+            },
+            navy: {
+              DEFAULT: 'var(--navy)',
+              deep: '#081226',
+              raise: '#12294D',
+              2: 'var(--navy-2)'
+            },
+            royal: 'var(--royal)',
+            electric: 'var(--electric)',
+            cyan: 'var(--cyan)',
+            ivory: {
+              DEFAULT: '#F5F0E6',
+              soft: '#FBF7EE',
+              deep: '#EAE2CF'
+            }
+          },
+          fontFamily: {
+            display: ['Fraunces', 'Georgia', 'serif'],
+            body: ['Manrope', 'system-ui', 'sans-serif'],
+            mono: ['"IBM Plex Mono"', 'ui-monospace', 'monospace']
+          },
+          boxShadow: {
+            soft: '0 20px 50px -28px rgba(8,18,38,.3)',
+            lift: '0 14px 36px -18px rgba(33,72,192,.32)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Animation Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <!-- Main Style -->
+  <link rel="stylesheet" href="./src/styles/main.css">
+
+  <style>
+    /* ============================================================
+     Design Tokens & Core Themes
+     ============================================================ */
+    :root {
+      --bg: #F5F0E6;
+      --bg-2: #ECE4D2;
+      --surface: #FBF7EE;
+      --surface-2: #F1EADB;
+      --ink: #171A20;
+      --ink-2: #5A6170;
+      --ink-3: #8B90A0;
+      --line: rgba(23, 26, 32, 0.12);
+      --line-strong: rgba(23, 26, 32, 0.28);
+      --navy: #0C1B33;
+      --navy-2: #0F1A30;
+      --royal: #2148C0;
+      --electric: #2E6BFF;
+      --cyan: #3ED3F0;
+      --glow: rgba(46, 107, 255, 0.28);
+      --glow-strong: rgba(33, 72, 192, 0.55);
+      --cyan-soft: rgba(62, 211, 240, 0.14);
+    }
+
+    .dark {
+      --bg: #0A0F1B;
+      --bg-2: #0D1425;
+      --surface: #101A2D;
+      --surface-2: #152238;
+      --ink: #EAE5D8;
+      --ink-2: #8E97AC;
+      --ink-3: #68707F;
+      --line: rgba(234, 229, 216, 0.12);
+      --line-strong: rgba(234, 229, 216, 0.28);
+      --navy: #081226;
+      --navy-2: #0C1322;
+      --royal: #3D63E8;
+      --electric: #4D82FF;
+      --cyan: #54DDF7;
+      --glow: rgba(77, 130, 255, 0.35);
+      --glow-strong: rgba(77, 130, 255, 0.6);
+      --cyan-soft: rgba(84, 221, 247, 0.12);
+    }
+
+    /* Base Reset & Smoothness */
+    html {
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      transition: background .35s ease, color .35s ease;
+    }
+
+    ::selection {
+      background: var(--electric);
+      color: #fff;
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--line-strong);
+      border-radius: 8px;
+      border: 2px solid var(--bg);
+    }
+
+    /* Responsive Container Wrapper */
+    .wrap {
+      margin: 0 auto;
+      width: 100%;
+      max-width: 1440px;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+    }
+
+    @media (min-width: 640px) {
+      .wrap {
+        padding-left: 1.75rem;
+        padding-right: 1.75rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .wrap {
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .wrap {
+        padding-left: 4.5rem;
+        padding-right: 4.5rem;
+      }
+    }
+
+    /* Typography Utilities */
+    .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .25em;
+      color: var(--ink-2);
+      display: inline-flex;
+      align-items: center;
+      gap: .75rem;
+    }
+
+    .eyebrow::before {
+      content: '';
+      width: 1.75rem;
+      height: 1px;
+      background: var(--electric);
+      flex: none;
+    }
+
+    /* Buttons & Interactive Elements */
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .65rem;
+      border-radius: 9999px;
+      font-family: 'Manrope', system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: .02em;
+      padding: 0.875rem 1.6rem;
+      overflow: hidden;
+      user-select: none;
+      white-space: nowrap;
+      transition: all .3s ease;
+    }
+
+    .btn-primary {
+      color: #F5F0E6;
+      background: var(--royal);
+      box-shadow: 0 12px 30px -12px var(--glow-strong);
+    }
+
+    .btn-primary:hover {
+      background: var(--electric);
+    }
+
+    .btn-primary .btn-sheen {
+      position: absolute;
+      inset: 0;
+      transform: translateX(-120%);
+      transition: transform .7s ease-out;
+      background: linear-gradient(105deg, transparent 40%, rgba(245, 240, 230, .35) 50%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .btn-primary:hover .btn-sheen {
+      transform: translateX(120%);
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--line-strong);
+      color: var(--ink);
+      background: transparent;
+    }
+
+    .btn-ghost:hover {
+      color: var(--electric);
+      border-color: var(--electric);
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11.5px;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--electric);
+      position: relative;
+      font-weight: 600;
+    }
+
+    .btn-link::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 1.5px;
+      background: var(--electric);
+      transform: scaleX(0.35);
+      transform-origin: left;
+      transition: transform .35s ease;
+    }
+
+    .btn-link:hover::after {
+      transform: scaleX(1);
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      border-radius: 9999px;
+      border: 1px solid var(--line);
+      padding: .45rem .875rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      background: var(--surface);
+      color: var(--ink-2);
+    }
+
+    .input-field {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid var(--line-strong);
+      padding: .75rem 0;
+      font-size: 15px;
+      font-weight: 500;
+      font-family: 'Manrope', system-ui, sans-serif;
+      outline: none;
+      transition: border-color .3s ease;
+      color: var(--ink);
+    }
+
+    .input-field::placeholder {
+      color: var(--ink-2);
+      opacity: .7;
+    }
+
+    .input-field:focus {
+      border-color: var(--electric);
+    }
+  </style>
+</head>
+
+<body class="font-body overflow-x-hidden">
+
+  <!-- Noise Texture Grain -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Desktop Custom Cursor -->
+  <div id="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true">
+    <svg width="24" height="24" fill="currentColor" class="c-icon bi bi-bounding-box-circles" viewBox="0 0 16 16">
+      <path
+        d="M2 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M0 2a2 2 0 0 1 3.937-.5h8.126A2 2 0 1 1 14.5 3.937v8.126a2 2 0 1 1-2.437 2.437H3.937A2 2 0 1 1 1.5 12.063V3.937A2 2 0 0 1 0 2m2.5 1.937v8.126c.703.18 1.256.734 1.437 1.437h8.126a2 2 0 0 1 1.437-1.437V3.937A2 2 0 0 1 12.063 2.5H3.937A2 2 0 0 1 2.5 3.937M14 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2M2 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2m12 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+    </svg>
+  </div>
+
+  <!-- Brand Preloader -->
+  <div id="loader" class="fixed inset-0 z-[110] flex flex-col items-center justify-center gap-5 px-6 text-center"
+    style="background:var(--bg)">
+    <div class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.35em]" style="color:var(--ink-2)">Hirely
+      Consultants</div>
+    <div class="font-display text-[20vw] sm:text-8xl leading-none font-light" style="color:var(--ink)">
+      <span id="loader-num">0</span><span style="color:var(--electric)">.</span>
+    </div>
+    <div class="w-36 sm:w-44 h-px overflow-hidden" style="background:var(--line-strong)">
+      <div id="loader-bar" class="h-full w-full" style="background:var(--electric);transform:scaleX(0)"></div>
+    </div>
+    <div class="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.25em]" style="color:var(--ink-2)">New York ·
+      London · Dubai · Singapore</div>
+  </div>
+
+  <!-- Header Navigation Bar -->
+  <nav id="site-nav" class="fixed top-0 inset-x-0 z-[80]">
+    <div class="wrap flex items-center justify-between h-[68px] sm:h-[76px]">
+      <a href="#top" class="flex items-center gap-2.5 sm:gap-3" aria-label="Hirely home">
+        <svg width="30" height="30" sm:width="34" sm:height="34" viewBox="0 0 64 64"
+          class="transition-transform duration-500 group-hover:rotate-90">
+          <rect width="64" height="64" rx="14" fill="var(--navy)" />
+          <path d="M20 14v36M44 14v36M20 32h24" stroke="var(--electric)" stroke-width="6" stroke-linecap="round" />
+          <circle cx="44" cy="14" r="5" fill="var(--cyan)" />
+        </svg>
+        <span class="font-display text-lg sm:text-[22px] font-semibold tracking-tight">Hirely<span
+            style="color:var(--electric)">.</span></span>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <div class="hidden lg:flex items-center gap-6 xl:gap-8">
+        <a class="nav-link" href="#firm">The Firm</a>
+        <a class="nav-link" href="#challenges">Challenges</a>
+        <a class="nav-link" href="#method">Method</a>
+        <a class="nav-link" href="#industries">Industries</a>
+        <a class="nav-link" href="#svc-recruitment">Recruitment</a>
+        <a class="nav-link" href="#network">Offices</a>
+        <a class="nav-link" href="#work">Work</a>
+        <a class="nav-link" href="#insights">Insights</a>
+      </div>
+
+      <!-- Actions & Controls -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <button id="theme-toggle" data-magnetic aria-label="Toggle dark mode"
+          class="w-9 h-9 sm:w-10 sm:h-10 rounded-full border flex items-center justify-center transition-colors duration-300 hover:border-[var(--electric)]"
+          style="border-color:var(--line-strong)">
+          <svg class="theme-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="4.4" />
+            <path
+              d="M12 2v2.4M12 19.6V22M2 12h2.4M19.6 12H22M4.9 4.9l1.7 1.7M17.4 17.4l1.7 1.7M4.9 19.1l1.7-1.7M17.4 6.6l1.7-1.7" />
+          </svg>
+          <svg class="theme-moon hidden" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round">
+            <path d="M20.4 14.2A8.5 8.5 0 0 1 9.8 3.6a8.5 8.5 0 1 0 10.6 10.6Z" />
+          </svg>
+        </button>
+        <a href="#contact"
+          class="btn btn-primary hidden sm:inline-flex !px-5 sm:!px-6 !py-2.5 sm:!py-3 !text-xs sm:!text-sm"
+          data-magnetic><span class="btn-sheen"></span>Start a project</a>
+        <button id="menu-btn"
+          class="lg:hidden w-9 h-9 sm:w-10 sm:h-10 rounded-full border flex flex-col items-center justify-center gap-[4.5px]"
+          style="border-color:var(--line-strong)" aria-label="Open menu" aria-expanded="false">
+          <span class="block w-4 h-[1.5px] rounded-full transition-transform" style="background:var(--ink)"></span>
+          <span class="block w-4 h-[1.5px] rounded-full transition-transform" style="background:var(--ink)"></span>
+        </button>
+      </div>
+    </div>
+    <div id="nav-progress" class="h-[2px] w-full origin-left"
+      style="background:linear-gradient(90deg,var(--royal),var(--cyan));transform:scaleX(0)"></div>
+  </nav>
+
+  <!-- Fullscreen Mobile Navigation Drawer -->
+  <div id="mobile-menu" class="fixed inset-0 z-[85] flex flex-col justify-between p-6 sm:p-8 lg:hidden overflow-y-auto"
+    style="background:var(--navy)">
+    <!-- Drawer Header with Brand and Close 'X' Button -->
+    <div class="flex items-center justify-between border-b pb-5" style="border-color:rgba(245,240,230,.12)">
+      <div class="flex items-center gap-2.5">
+        <svg width="26" height="26" viewBox="0 0 64 64">
+          <rect width="64" height="64" rx="14" fill="#12294D" />
+          <path d="M20 14v36M44 14v36M20 32h24" stroke="var(--electric)" stroke-width="6" stroke-linecap="round" />
+          <circle cx="44" cy="14" r="5" fill="var(--cyan)" />
+        </svg>
+        <span class="font-display text-lg font-semibold text-ivory">Hirely<span
+            style="color:var(--cyan)">.</span></span>
+      </div>
+      <button id="menu-close-btn"
+        class="w-10 h-10 rounded-full border flex items-center justify-center transition-colors hover:border-white"
+        style="border-color:rgba(245,240,230,.25);color:#F5F0E6" aria-label="Close menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round">
+          <path d="M18 6 6 18M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Navigation Links Stack -->
+    <div class="flex flex-col gap-3 py-6">
+      <a href="#firm" class="m-link font-display text-2xl sm:text-3xl text-ivory hover:text-cyan transition-colors"
+        style="transition-delay:.08s">The Firm</a>
+      <a href="#challenges"
+        class="m-link font-display text-2xl sm:text-3xl text-ivory hover:text-cyan transition-colors"
+        style="transition-delay:.12s">Challenges</a>
+      <a href="#method" class="m-link font-display text-2xl sm:text-3xl text-ivory hover:text-cyan transition-colors"
+        style="transition-delay:.20s">Method</a>
+      <a href="#industries"
+        class="m-link font-display text-2xl sm:text-3xl text-ivory hover:text-cyan transition-colors"
+        style="transition-delay:.24s">Industries</a>
+      <a href="#svc-recruitment"
+        class="m-link font-display text-2xl sm:text-3xl italic hover:text-cyan transition-colors"
+        style="transition-delay:.16s;color:var(--cyan)">Recruitment Support</a>
+      <a href="#network" class="m-link font-display text-2xl sm:text-3xl text-ivory hover:text-cyan transition-colors"
+        style="transition-delay:.28s">Offices</a>
+      <a href="#work" class="m-link font-display text-2xl sm:text-3xl text-ivory hover:text-cyan transition-colors"
+        style="transition-delay:.32s">Work</a>
+      <a href="#insights" class="m-link font-display text-2xl sm:text-3xl text-ivory hover:text-cyan transition-colors"
+        style="transition-delay:.36s">Insights</a>
+      <a href="#contact"
+        class="m-link font-display text-2xl sm:text-3xl italic text-white hover:text-cyan transition-colors"
+        style="transition-delay:.40s">Contact</a>
+    </div>
+
+    <!-- Mobile Drawer Footer Info -->
+    <div class="pt-5 border-t flex flex-col gap-3 font-mono text-[11px] uppercase tracking-[0.18em] text-ivory/65"
+      style="border-color:rgba(245,240,230,.12)">
+      <div class="flex flex-wrap items-center justify-between gap-2">
+        <a href="mailto:hello@hirelyconsultants.com"
+          class="hover:text-cyan transition-colors">hello@hirelyconsultants.com</a>
+        <a href="tel:+12125550148" class="hover:text-cyan transition-colors">+1 (212) 555-0148</a>
+      </div>
+      <div class="text-[10px] text-ivory/40">New York · London · Dubai · Singapore</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+     01 · Hero Section
+     ============================================================ -->
+  <header id="top"
+    class="relative min-h-[92svh] sm:min-h-screen flex flex-col justify-between overflow-hidden blueprint pt-28 pb-10 sm:py-0">
+    <canvas id="net-canvas" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
+    <div class="absolute inset-0 pointer-events-none"
+      style="background:radial-gradient(1100px 600px at 78% 30%,var(--glow) 0%,transparent 60%),radial-gradient(700px 500px at 12% 85%,var(--cyan-soft) 0%,transparent 55%)">
+    </div>
+
+    <!-- Side Typography Rail -->
+    <div
+      class="hidden xl:flex absolute left-6 2xl:left-8 top-0 bottom-0 flex-col items-center justify-between py-24 z-10 pointer-events-none">
+      <span class="font-mono text-[9.5px] tracking-[0.35em] uppercase"
+        style="color:var(--ink-2);writing-mode:vertical-rl">Est. 2011 — Global Business Advisory</span>
+      <span class="block w-px h-20" style="background:var(--line-strong)"></span>
+      <span class="font-mono text-[9.5px] tracking-[0.35em]" style="color:var(--ink-2);writing-mode:vertical-rl">NY ·
+        LDN · DXB · SG</span>
+    </div>
+
+    <div class="wrap relative z-10 flex-1 flex flex-col justify-center pt-8 sm:pt-28 md:pt-36 pb-10 sm:pb-16">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
+        <div class="lg:col-span-8">
+          <p class="eyebrow hero-fade mb-5 sm:mb-7">Hirely Consultants — Counsel for consequential decisions</p>
+          <h1
+            class="font-display font-light leading-[0.98] sm:leading-[0.96] tracking-[-0.025em] text-[clamp(2.5rem,7.5vw,7.8rem)]">
+            <span class="mask-line"><span class="hero-line">Clarity for</span></span>
+            <span class="mask-line"><span class="hero-line italic"
+                style="color:var(--royal)">consequential</span></span>
+            <span class="mask-line"><span class="hero-line">decisions<span
+                  style="color:var(--electric)">.</span></span></span>
+          </h1>
+        </div>
+        <div class="lg:col-span-4 hero-fade">
+          <p class="text-[15px] sm:text-[16.5px] leading-relaxed max-w-md" style="color:var(--ink-2)">
+            Hirely advises boards, founders and Fortune 500 leadership teams across <strong class="font-semibold"
+              style="color:var(--ink)">32 countries</strong> — pairing forensic evidence with human insight to move
+            strategy, talent and technology forward.
+          </p>
+          <div class="mt-6 sm:mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
+            <a href="#contact" class="btn btn-primary w-full sm:w-auto" data-magnetic><span
+                class="btn-sheen"></span>Start a conversation
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+            <a href="#challenges" class="btn btn-ghost w-full sm:w-auto" data-magnetic>Explore the practice</a>
+          </div>
+          <div class="mt-7 sm:mt-9 flex items-center gap-3.5">
+            <div class="flex -space-x-2">
+              <span
+                class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-mono text-[9px] font-medium"
+                style="background:var(--navy);color:var(--cyan);border-color:var(--bg)">EM</span>
+              <span
+                class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-mono text-[9px] font-medium"
+                style="background:var(--royal);color:#F5F0E6;border-color:var(--bg)">RM</span>
+              <span
+                class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-mono text-[9px] font-medium"
+                style="background:var(--electric);color:#F5F0E6;border-color:var(--bg)">AC</span>
+              <span
+                class="w-8 h-8 rounded-full border-2 flex items-center justify-center font-mono text-[9px] font-medium"
+                style="background:var(--surface);color:var(--ink);border-color:var(--bg)">+</span>
+            </div>
+            <p class="font-mono text-[10.5px] uppercase tracking-[0.16em]" style="color:var(--ink-2)">Trusted by
+              480+<br>leadership teams</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator Indicator -->
+    <div class="wrap relative z-10 pb-4 sm:pb-6 flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <span class="block w-px h-8 sm:h-10 overflow-hidden relative" style="background:var(--line-strong)"><span
+            class="absolute inset-x-0 top-0 h-4"
+            style="background:var(--electric);animation:scrollcue 2s ease-in-out infinite"></span></span>
+        <span class="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.25em]" style="color:var(--ink-2)">Scroll
+          to explore</span>
+      </div>
+      <span class="hidden sm:block font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.25em]"
+        style="color:var(--ink-2)">40.7484° N, 73.9857° W — Headquarters</span>
+    </div>
+    <style>
+      @keyframes scrollcue {
+        0% {
+          transform: translateY(-120%)
+        }
+
+        60%,
+        100% {
+          transform: translateY(260%)
+        }
+      }
+    </style>
+  </header>
+
+  <!-- ============================================================
+     02 · Client Ticker Marquee
+     ============================================================ -->
+  <section class="marquee border-y py-4 sm:py-5 overflow-hidden"
+    style="border-color:var(--line);background:var(--surface)" aria-label="Partner Organizations">
+    <div class="marquee-track items-center gap-8 sm:gap-12">
+      <span class="font-display text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink)">Meridian
+        Capital</span><span style="color:var(--electric)">✦</span>
+      <span class="font-display italic text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink-2)">Northwind
+        Health</span><span style="color:var(--cyan)">✦</span>
+      <span class="font-display text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink)">Vantage
+        Energy</span><span style="color:var(--electric)">✦</span>
+      <span class="font-display italic text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink-2)">Osprey
+        Bank</span><span style="color:var(--cyan)">✦</span>
+      <span class="font-display text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink)">Helix
+        Biotech</span><span style="color:var(--electric)">✦</span>
+      <span class="font-display italic text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink-2)">Atlas Retail
+        Group</span><span style="color:var(--cyan)">✦</span>
+      <span class="font-display text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink)">Cobalt
+        Systems</span><span style="color:var(--electric)">✦</span>
+      <span class="font-display italic text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink-2)">Sovereign
+        Air</span><span style="color:var(--cyan)">✦</span>
+      <!-- Seamless Loop Clone -->
+      <span class="font-display text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink)">Meridian
+        Capital</span><span style="color:var(--electric)">✦</span>
+      <span class="font-display italic text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink-2)">Northwind
+        Health</span><span style="color:var(--cyan)">✦</span>
+      <span class="font-display text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink)">Vantage
+        Energy</span><span style="color:var(--electric)">✦</span>
+      <span class="font-display italic text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink-2)">Osprey
+        Bank</span><span style="color:var(--cyan)">✦</span>
+      <span class="font-display text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink)">Helix
+        Biotech</span><span style="color:var(--electric)">✦</span>
+      <span class="font-display italic text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink-2)">Atlas Retail
+        Group</span><span style="color:var(--cyan)">✦</span>
+      <span class="font-display text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink)">Cobalt
+        Systems</span><span style="color:var(--electric)">✦</span>
+      <span class="font-display italic text-xl sm:text-2xl whitespace-nowrap" style="color:var(--ink-2)">Sovereign
+        Air</span><span style="color:var(--cyan)">✦</span>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     03 · The Firm
+     ============================================================ -->
+  <section id="firm" class="py-16 sm:py-24 lg:py-36 scroll-mt-24 relative overflow-hidden">
+    <span
+      class="ghost-num font-display absolute right-4 sm:right-10 -top-8 text-[18vw] sm:text-[22vw] lg:text-[24vw] leading-none select-none hidden sm:block"
+      data-parallax="-0.08">01</span>
+    <div class="wrap grid lg:grid-cols-12 gap-10 lg:gap-14">
+      <div class="lg:col-span-5">
+        <div class="lg:sticky lg:top-28">
+          <p class="eyebrow" data-reveal>01 — The Firm</p>
+          <h2 class="font-display font-light text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] mt-4 sm:mt-6" data-reveal>
+            A consultancy built like an <em class="italic" style="color:var(--royal)">operating firm</em>.
+          </h2>
+          <div class="mt-6 sm:mt-8 border-l-2 pl-5 sm:pl-6" style="border-color:var(--electric)" data-reveal>
+            <p class="font-display italic text-lg sm:text-xl leading-snug">“We don't hand over decks.<br>We hand over
+              outcomes.”</p>
+            <p class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.2em] mt-2.5"
+              style="color:var(--ink-2)">— Founding principle, 2011</p>
+          </div>
+          <div class="mt-8 sm:mt-10 grid grid-cols-2 gap-px overflow-hidden rounded-xl border"
+            style="border-color:var(--line);background:var(--line)" data-reveal>
+            <div class="p-4 sm:p-5 lg:p-6" style="background:var(--surface)">
+              <p class="font-display text-3xl sm:text-4xl"><span data-count="14">0</span></p>
+              <p class="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.16em] mt-1"
+                style="color:var(--ink-2)">Years in practice</p>
+            </div>
+            <div class="p-4 sm:p-5 lg:p-6" style="background:var(--surface)">
+              <p class="font-display text-3xl sm:text-4xl"><span data-count="140">0</span></p>
+              <p class="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.16em] mt-1"
+                style="color:var(--ink-2)">Advisors & specialists</p>
+            </div>
+            <div class="p-4 sm:p-5 lg:p-6" style="background:var(--surface)">
+              <p class="font-display text-3xl sm:text-4xl"><span data-count="32">0</span></p>
+              <p class="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.16em] mt-1"
+                style="color:var(--ink-2)">Countries served</p>
+            </div>
+            <div class="p-4 sm:p-5 lg:p-6" style="background:var(--surface)">
+              <p class="font-display text-3xl sm:text-4xl"><span data-count="6">0</span></p>
+              <p class="font-mono text-[9px] sm:text-[10px] uppercase tracking-[0.16em] mt-1"
+                style="color:var(--ink-2)">Integrated practices</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-7 space-y-7 sm:space-y-9">
+        <div class="relative overflow-hidden rounded-xl border shadow-soft group" style="border-color:var(--line)"
+          data-reveal data-cursor data-cursor-text="Firm">
+          <div class="overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80"
+              alt="Hirely consultants leading a boardroom executive session"
+              class="w-full h-[260px] sm:h-[380px] lg:h-[420px] object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-[1.04]"
+              data-parallax-img />
+          </div>
+          <div
+            class="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 chip !bg-[rgba(8,18,38,.72)] !text-ivory !border-transparent backdrop-blur-sm text-[10px]">
+            Strategic Executive Session</div>
+        </div>
+
+        <div class="space-y-4 sm:space-y-5 text-[15px] sm:text-[16px] leading-[1.8]" style="color:var(--ink-2)">
+          <p data-reveal><strong class="font-semibold" style="color:var(--ink)">Hirely was founded in New York in
+              2011</strong> on a contrarian premise: that the gap between strategic intent and market execution is
+            fundamentally a capability problem. Fourteen years later, that operator mindset defines our practice.</p>
+          <p data-reveal>Today, 140 consultants, operators and sector specialists work from <strong
+              class="font-semibold" style="color:var(--ink)">New York, London, Dubai and Singapore</strong> — one single
+            integrated bench rather than disconnected regional outposts. Every client engagement is led by operators who
+            have sat in executive leadership seats.</p>
+          <p data-reveal>We operate with high selectivity: fewer than <strong class="font-semibold"
+              style="color:var(--ink)">60 major mandates per year</strong>, allowing our partners to remain deeply
+            involved from diagnosis to sustained capability transfer.</p>
+        </div>
+
+        <div class="flex flex-wrap gap-2.5" data-reveal>
+          <span class="chip">Selective intake</span>
+          <span class="chip">Outcome-tied fees</span>
+          <span class="chip">Operator-led pods</span>
+          <span class="chip">Unified global bench</span>
+          <span class="chip">Confidential clearance</span>
+        </div>
+
+        <div class="card-surface p-5 sm:p-6 flex items-start gap-4" data-reveal>
+          <svg class="flex-none mt-0.5" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--electric)"
+            stroke-width="1.8" stroke-linecap="round">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 7v5l3.5 2" />
+          </svg>
+          <p class="text-[14px] leading-relaxed" style="color:var(--ink-2)"><strong class="font-semibold"
+              style="color:var(--ink)">The 24-hour partner rule.</strong> Inquiries receive a direct partner-level reply
+            within one business day anywhere worldwide through our follow-the-sun coordination.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     04 · Challenges Overview
+     ============================================================ -->
+  <section class="py-16 sm:py-24 lg:py-36 scroll-mt-24 relative" id="challenges" style="background:var(--bg-2)">
+    <div class="wrap">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end mb-10 sm:mb-14">
+        <div class="lg:col-span-7">
+          <p class="eyebrow" data-reveal>02 — The Market Reality</p>
+          <h2 class="font-display font-light text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] mt-4 sm:mt-5" data-reveal>
+            Challenges Faced by<br><em class="italic" style="color:var(--royal)">Global Businesses</em></h2>
+        </div>
+        <p class="lg:col-span-5 text-[14.5px] sm:text-[15.5px] leading-relaxed border-l-2 pl-4 sm:pl-5"
+          style="border-color:var(--electric);color:var(--ink-2)" data-reveal>Navigating complex cross-border markets
+          demands specialized organizational architecture and precision execution.</p>
+      </div>
+      <div class="ch-grid">
+        <article class="ch-card" data-reveal>
+          <span class="ch-num">01</span>
+          <div class="ch-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg></div>
+          <h3>International Outsourcing</h3>
+          <p>Hire dedicated, vetted and trained remote specialists across key jurisdictions with full compliance
+            integration.</p>
+          <span class="ch-tag">Talent Architecture</span>
+        </article>
+        <article class="ch-card" data-reveal>
+          <span class="ch-num">02</span>
+          <div class="ch-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round">
+              <path d="M3 3v18h18" />
+              <path d="m7 15 4-6 4 3 5-8" />
+            </svg></div>
+          <h3>Broad Industrial Spectrum</h3>
+          <p>Access high-caliber expertise across specialized domain verticals and emerging multi-country markets.</p>
+          <span class="ch-tag">Sector Fluency</span>
+        </article>
+        <article class="ch-card" data-reveal>
+          <span class="ch-num">03</span>
+          <div class="ch-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg></div>
+          <h3>Cost Optimization</h3>
+          <p>Save up to <span class="ch-big-inline">70%</span> of hiring and expansion overhead through unified,
+            enterprise-grade talent infrastructure.</p>
+          <span class="ch-tag">Efficiency</span>
+        </article>
+        <article class="ch-card" data-reveal>
+          <span class="ch-num">04</span>
+          <div class="ch-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              <path d="m9 12 2 2 4-4" />
+            </svg></div>
+          <h3>Governance & Security</h3>
+          <p>Dynamic, compliant, and rigorously audited business frameworks deployed securely across cross-border hubs.
+          </p>
+          <span class="ch-tag">Assurance</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     05 · Problem Ledger (Interactive Diagnostic Accordion)
+     ============================================================ -->
+  <section id="ledger" class="py-16 sm:py-24 lg:py-36 scroll-mt-24 relative overflow-hidden">
+    <span
+      class="ghost-num font-display absolute  right-4 sm:right-8 top-0 text-[14vw] sm:text-[18vw] leading-none select-none hidden md:block"
+      data-parallax="-0.08">03</span>
+    <div class="wrap">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end mb-12 sm:mb-16">
+        <div class="lg:col-span-7">
+          <p class="eyebrow" data-reveal>03 — Diagnostic Situations</p>
+          <h2 class="font-display font-light text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] mt-4 sm:mt-5" data-reveal>
+            Leaders call us when the decision is <em class="italic" style="color:var(--royal)">consequential</em>.</h2>
+        </div>
+        <p class="lg:col-span-5 text-[14.5px] sm:text-[15.5px] leading-relaxed" style="color:var(--ink-2)" data-reveal>
+          Six recurring scenarios account for 80% of our advisory mandates. Select any row to inspect the friction
+          points and our structured solution.</p>
+      </div>
+
+      <div class="border-b" style="border-color:var(--line)" data-reveal>
+
+        <!-- Row 01 -->
+        <div class="ledger-row border-t" style="border-color:var(--line)">
+          <button
+            class="acc-btn w-full grid grid-cols-[auto_1fr_auto] sm:grid-cols-[56px_1fr_auto_36px] md:grid-cols-[70px_1fr_180px_40px] items-center gap-3 sm:gap-5 py-5 sm:py-7 px-2 sm:px-4 text-left group"
+            aria-expanded="false">
+            <span class="font-mono text-[11px] sm:text-[12px]" style="color:var(--electric)">C—01</span>
+            <span class="font-display text-lg sm:text-2xl leading-snug">Talent strategy lagging business
+              expansion</span>
+            <span class="hidden sm:block font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.16em]"
+              style="color:var(--ink-2)">talent · planning</span>
+            <span
+              class="acc-icon justify-self-end w-8 h-8 sm:w-9 sm:h-9 rounded-full border flex items-center justify-center flex-none"
+              style="border-color:var(--line-strong)"><svg width="12" height="12" viewBox="0 0 14 14"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <path d="M7 1v12M1 7h12" />
+              </svg></span>
+          </button>
+          <div class="acc-panel">
+            <div>
+              <div class="grid md:grid-cols-2 gap-6 sm:gap-8 pb-7 sm:pb-9 pl-0 sm:pl-14 md:pl-[70px] pr-2">
+                <div>
+                  <p class="font-mono text-[9.5px] uppercase tracking-[0.2em] mb-2 sm:mb-3" style="color:var(--royal)">
+                    The Bottleneck</p>
+                  <p class="text-[14px] sm:text-[14.5px] leading-relaxed" style="color:var(--ink-2)">The strategic plan
+                    projects multi-region revenue growth, but the organizational design, skill competencies and
+                    leadership bench belong to the prior operating cycle.</p>
+                </div>
+                <div>
+                  <p class="font-mono text-[9.5px] uppercase tracking-[0.2em] mb-2 sm:mb-3"
+                    style="color:var(--electric)">Hirely Action</p>
+                  <p class="text-[14px] sm:text-[14.5px] leading-relaxed" style="color:var(--ink-2)">Capability-first
+                    workforce modeling: we map critical roles, resolve build-or-buy decisions, and institute a 24-month
+                    roadmap with quarterly telemetry checkpoints.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 02 -->
+        <div class="ledger-row border-t" style="border-color:var(--line)">
+          <button
+            class="acc-btn w-full grid grid-cols-[auto_1fr_auto] sm:grid-cols-[56px_1fr_auto_36px] md:grid-cols-[70px_1fr_180px_40px] items-center gap-3 sm:gap-5 py-5 sm:py-7 px-2 sm:px-4 text-left group"
+            aria-expanded="false">
+            <span class="font-mono text-[11px] sm:text-[12px]" style="color:var(--electric)">C—02</span>
+            <span class="font-display text-lg sm:text-2xl leading-snug">Digital & AI adoption stalling after pilot
+              phase</span>
+            <span class="hidden sm:block font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.16em]"
+              style="color:var(--ink-2)">digital · AI</span>
+            <span
+              class="acc-icon justify-self-end w-8 h-8 sm:w-9 sm:h-9 rounded-full border flex items-center justify-center flex-none"
+              style="border-color:var(--line-strong)"><svg width="12" height="12" viewBox="0 0 14 14"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <path d="M7 1v12M1 7h12" />
+              </svg></span>
+          </button>
+          <div class="acc-panel">
+            <div>
+              <div class="grid md:grid-cols-2 gap-6 sm:gap-8 pb-7 sm:pb-9 pl-0 sm:pl-14 md:pl-[70px] pr-2">
+                <div>
+                  <p class="font-mono text-[9.5px] uppercase tracking-[0.2em] mb-2 sm:mb-3" style="color:var(--royal)">
+                    The Bottleneck</p>
+                  <p class="text-[14px] sm:text-[14.5px] leading-relaxed" style="color:var(--ink-2)">A dozen impressive
+                    proof-of-concept experiments with minimal real bottom-line contribution. Technology works;
+                    cross-departmental governance doesn't.</p>
+                </div>
+                <div>
+                  <p class="font-mono text-[9.5px] uppercase tracking-[0.2em] mb-2 sm:mb-3"
+                    style="color:var(--electric)">Hirely Action</p>
+                  <p class="text-[14px] sm:text-[14.5px] leading-relaxed" style="color:var(--ink-2)">We prune marginal
+                    use cases, establishing clear operational ownership, skills academies, data security guidelines, and
+                    real-time CFO value dashboards.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 03 -->
+        <div class="ledger-row border-t" style="border-color:var(--line)">
+          <button
+            class="acc-btn w-full grid grid-cols-[auto_1fr_auto] sm:grid-cols-[56px_1fr_auto_36px] md:grid-cols-[70px_1fr_180px_40px] items-center gap-3 sm:gap-5 py-5 sm:py-7 px-2 sm:px-4 text-left group"
+            aria-expanded="false">
+            <span class="font-mono text-[11px] sm:text-[12px]" style="color:var(--electric)">C—03</span>
+            <span class="font-display text-lg sm:text-2xl leading-snug">Executive bench thinning during rapid
+              scale</span>
+            <span class="hidden sm:block font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.16em]"
+              style="color:var(--ink-2)">search · succession</span>
+            <span
+              class="acc-icon justify-self-end w-8 h-8 sm:w-9 sm:h-9 rounded-full border flex items-center justify-center flex-none"
+              style="border-color:var(--line-strong)"><svg width="12" height="12" viewBox="0 0 14 14"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <path d="M7 1v12M1 7h12" />
+              </svg></span>
+          </button>
+          <div class="acc-panel">
+            <div>
+              <div class="grid md:grid-cols-2 gap-6 sm:gap-8 pb-7 sm:pb-9 pl-0 sm:pl-14 md:pl-[70px] pr-2">
+                <div>
+                  <p class="font-mono text-[9.5px] uppercase tracking-[0.2em] mb-2 sm:mb-3" style="color:var(--royal)">
+                    The Bottleneck</p>
+                  <p class="text-[14px] sm:text-[14.5px] leading-relaxed" style="color:var(--ink-2)">Succession planning
+                    remains an ad-hoc conversation while leadership vacancies in key regions delay multi-million-dollar
+                    initiatives.</p>
+                </div>
+                <div>
+                  <p class="font-mono text-[9.5px] uppercase tracking-[0.2em] mb-2 sm:mb-3"
+                    style="color:var(--electric)">Hirely Action</p>
+                  <p class="text-[14px] sm:text-[14.5px] leading-relaxed" style="color:var(--ink-2)">Retained executive
+                    search combined with proactive leadership pipeline architecture across 32 countries, vetting both
+                    external successors and internal rising leaders.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 04 -->
+        <div class="ledger-row border-t" style="border-color:var(--line)">
+          <button
+            class="acc-btn w-full grid grid-cols-[auto_1fr_auto] sm:grid-cols-[56px_1fr_auto_36px] md:grid-cols-[70px_1fr_180px_40px] items-center gap-3 sm:gap-5 py-5 sm:py-7 px-2 sm:px-4 text-left group"
+            aria-expanded="false">
+            <span class="font-mono text-[11px] sm:text-[12px]" style="color:var(--electric)">C—04</span>
+            <span class="font-display text-lg sm:text-2xl leading-snug">Post-merger integration and cultural
+              drift</span>
+            <span class="hidden sm:block font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.16em]"
+              style="color:var(--ink-2)">M&A · culture</span>
+            <span
+              class="acc-icon justify-self-end w-8 h-8 sm:w-9 sm:h-9 rounded-full border flex items-center justify-center flex-none"
+              style="border-color:var(--line-strong)"><svg width="12" height="12" viewBox="0 0 14 14"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+                <path d="M7 1v12M1 7h12" />
+              </svg></span>
+          </button>
+          <div class="acc-panel">
+            <div>
+              <div class="grid md:grid-cols-2 gap-6 sm:gap-8 pb-7 sm:pb-9 pl-0 sm:pl-14 md:pl-[70px] pr-2">
+                <div>
+                  <p class="font-mono text-[9.5px] uppercase tracking-[0.2em] mb-2 sm:mb-3" style="color:var(--royal)">
+                    The Bottleneck</p>
+                  <p class="text-[14px] sm:text-[14.5px] leading-relaxed" style="color:var(--ink-2)">Deal models
+                    calculate synergy on spreadsheets, but organizational friction causes key performers to depart and
+                    integration timelines to slip.</p>
+                </div>
+                <div>
+                  <p class="font-mono text-[9.5px] uppercase tracking-[0.2em] mb-2 sm:mb-3"
+                    style="color:var(--electric)">Hirely Action</p>
+                  <p class="text-[14px] sm:text-[14.5px] leading-relaxed" style="color:var(--ink-2)">Quantitative
+                    retention indexing, restructured decision rights, and an intensive 100-day integration program that
+                    secures a 90%+ retention rate on key talent.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     06 · The Method (Pinned Card Deck)
+     ============================================================ -->
+  <section id="method" class="py-16 sm:py-24 lg:py-36 scroll-mt-24 relative" style="background:var(--bg-2)">
+    <div class="wrap mb-10 sm:mb-14">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end">
+        <div class="lg:col-span-7">
+          <p class="eyebrow" data-reveal>04 — Delivery Architecture</p>
+          <h2 class="font-display font-light text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] mt-4 sm:mt-5" data-reveal>
+            Four phases. Clear metrics.<br><em class="italic" style="color:var(--royal)">How mandates build value.</em>
+          </h2>
+        </div>
+        <p class="lg:col-span-5 text-[14.5px] sm:text-[15.5px] leading-relaxed" style="color:var(--ink-2)" data-reveal>
+          Every engagement follows an audited four-stage trajectory — Discover, Design, Deliver, Sustain — with
+          transparent outcome milestones.</p>
+      </div>
+    </div>
+
+    <div class="wrap max-w-[1100px]">
+      <div class="relative">
+
+        <!-- Phase 1 -->
+        <article class="stack-card mb-6 sm:mb-8 rounded-xl border p-6 sm:p-10 lg:p-12 shadow-soft"
+          style="--i:0;background:var(--surface);border-color:var(--line)">
+          <div class="grid lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+            <div class="lg:col-span-3 font-display ghost-num text-7xl sm:text-9xl leading-none">01</div>
+            <div class="lg:col-span-6">
+              <div class="flex flex-wrap items-center gap-2.5 mb-3"><span
+                  class="chip !text-ivory !border-transparent !text-[10px]"
+                  style="background:var(--royal)">Discover</span><span
+                  class="font-mono text-[10px] uppercase tracking-[0.2em]" style="color:var(--ink-2)">Weeks 1–3</span>
+              </div>
+              <h3 class="font-display text-2xl sm:text-3xl font-light">Evidence base before opinion.</h3>
+              <p class="mt-3 sm:mt-4 text-[14px] sm:text-[15px] leading-relaxed" style="color:var(--ink-2)">Multi-tiered
+                executive interviews, market telemetry, operational numbers and diagnostic data analysis to build an
+                empirical problem map.</p>
+            </div>
+            <div class="lg:col-span-3">
+              <p class="font-mono text-[9.5px] uppercase tracking-[0.2em] mb-2" style="color:var(--ink-2)">Deliverable
+              </p>
+              <div class="card-surface p-4">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--royal)" stroke-width="1.8"
+                  stroke-linecap="round">
+                  <circle cx="11" cy="11" r="7" />
+                  <path d="m21 21-4.3-4.3" />
+                </svg>
+                <p class="font-display text-base font-semibold mt-2">Diagnostic Atlas</p>
+                <p class="text-[12px] mt-0.5" style="color:var(--ink-2)">Quantified baseline problem statement.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Phase 2 -->
+        <article class="stack-card mb-6 sm:mb-8 rounded-xl border p-6 sm:p-10 lg:p-12 shadow-soft"
+          style="--i:1;background:var(--navy);border-color:rgba(245,240,230,.14);color:#F5F0E6">
+          <div class="grid lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+            <div class="lg:col-span-3 font-display text-7xl sm:text-9xl leading-none"
+              style="color:transparent;-webkit-text-stroke:1px rgba(245,240,230,.3)">02</div>
+            <div class="lg:col-span-6">
+              <div class="flex flex-wrap items-center gap-2.5 mb-3"><span
+                  class="chip !border-transparent !text-navy !text-[10px]"
+                  style="background:var(--cyan)">Design</span><span
+                  class="font-mono text-[10px] uppercase tracking-[0.2em] text-ivory/50">Weeks 3–6</span></div>
+              <h3 class="font-display text-2xl sm:text-3xl font-light">Clear trade-offs, executable paths.</h3>
+              <p class="mt-3 sm:mt-4 text-[14px] sm:text-[15px] leading-relaxed text-ivory/70">Two to three credible
+                paths designed, fully priced in capital, personnel and time requirements, co-authored with client
+                stakeholders.</p>
+            </div>
+            <div class="lg:col-span-3">
+              <p class="font-mono text-[9.5px] uppercase tracking-[0.2em] mb-2 text-ivory/50">Deliverable</p>
+              <div class="rounded-xl border p-4"
+                style="border-color:rgba(245,240,230,.16);background:rgba(245,240,230,.04)">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.8"
+                  stroke-linecap="round">
+                  <rect x="4" y="4" width="16" height="16" rx="2" />
+                  <path d="M4 10h16M10 4v16" />
+                </svg>
+                <p class="font-display text-base font-semibold mt-2">The Blueprint</p>
+                <p class="text-[12px] mt-0.5 text-ivory/60">Unified operational decision roadmap.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Phase 3 -->
+        <article class="stack-card mb-6 sm:mb-8 rounded-xl border p-6 sm:p-10 lg:p-12 shadow-soft"
+          style="--i:2;background:var(--surface);border-color:var(--line)">
+          <div class="grid lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+            <div class="lg:col-span-3 font-display ghost-num text-7xl sm:text-9xl leading-none">03</div>
+            <div class="lg:col-span-6">
+              <div class="flex flex-wrap items-center gap-2.5 mb-3"><span
+                  class="chip !text-ivory !border-transparent !text-[10px]"
+                  style="background:var(--electric)">Deliver</span><span
+                  class="font-mono text-[10px] uppercase tracking-[0.2em]" style="color:var(--ink-2)">Weeks 6–14</span>
+              </div>
+              <h3 class="font-display text-2xl sm:text-3xl font-light">Embedded pods in the room.</h3>
+              <p class="mt-3 sm:mt-4 text-[14px] sm:text-[15px] leading-relaxed" style="color:var(--ink-2)">Working
+                side-by-side with executive leadership through bi-weekly sprints — closing searches, deploying
+                frameworks, and managing rollout telemetry.</p>
+            </div>
+            <div class="lg:col-span-3">
+              <p class="font-mono text-[9.5px] uppercase tracking-[0.2em] mb-2" style="color:var(--ink-2)">Deliverable
+              </p>
+              <div class="card-surface p-4">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--electric)" stroke-width="1.8"
+                  stroke-linecap="round">
+                  <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" />
+                </svg>
+                <p class="font-display text-base font-semibold mt-2">Working Outcomes</p>
+                <p class="text-[12px] mt-0.5" style="color:var(--ink-2)">Leadership placed, systems operating.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Phase 4 -->
+        <article class="stack-card rounded-xl border p-6 sm:p-10 lg:p-12 shadow-soft"
+          style="--i:3;background:var(--surface);border-color:var(--line);box-shadow:0 24px 60px -28px var(--glow)">
+          <div class="grid lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+            <div class="lg:col-span-3 font-display text-7xl sm:text-9xl leading-none"
+              style="color:var(--cyan);opacity:.85">04</div>
+            <div class="lg:col-span-6">
+              <div class="flex flex-wrap items-center gap-2.5 mb-3"><span class="chip !text-[10px]"
+                  style="border-color:var(--cyan);color:var(--cyan)">Sustain</span><span
+                  class="font-mono text-[10px] uppercase tracking-[0.2em]" style="color:var(--ink-2)">Ongoing</span>
+              </div>
+              <h3 class="font-display text-2xl sm:text-3xl font-light">Transferring autonomy.</h3>
+              <p class="mt-3 sm:mt-4 text-[14px] sm:text-[15px] leading-relaxed" style="color:var(--ink-2)">Structured
+                capability transfer, internal dashboards, and quarterly performance governance so client teams operate
+                independently long after delivery.</p>
+            </div>
+            <div class="lg:col-span-3">
+              <p class="font-mono text-[9.5px] uppercase tracking-[0.2em] mb-2" style="color:var(--ink-2)">Deliverable
+              </p>
+              <div class="card-surface p-4">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--cyan)" stroke-width="1.8"
+                  stroke-linecap="round">
+                  <path d="M18 8a6 6 0 1 0-12 0c0 6-2.5 7.5-2.5 7.5h17S18 14 18 8" />
+                  <path d="M10 20a2.2 2.2 0 0 0 4 0" />
+                </svg>
+                <p class="font-display text-base font-semibold mt-2">Lasting Capability</p>
+                <p class="text-[12px] mt-0.5" style="color:var(--ink-2)">Autonomous leadership execution.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     07 · Industries
+     ============================================================ -->
+  <section id="industries" class="py-16 sm:py-24 lg:py-36 scroll-mt-24 relative overflow-hidden">
+    <span
+      class="ghost-num font-display absolute  right-4 sm:right-8 top-0 text-[14vw] sm:text-[18vw] leading-none select-none hidden md:block"
+      data-parallax="-0.08">05</span>
+    <div class="wrap relative">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end mb-10 sm:mb-14">
+        <div class="lg:col-span-7">
+          <p class="eyebrow" data-reveal>05 — Sector Practice</p>
+          <h2 class="font-display font-light text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] mt-4 sm:mt-5" data-reveal>
+            Sector fluency, not <em class="italic" style="color:var(--royal)">sector tourism</em>.</h2>
+        </div>
+        <p class="lg:col-span-5 text-[14.5px] sm:text-[15.5px] leading-relaxed" style="color:var(--ink-2)" data-reveal>
+          Our partners bring an average of 17 years operating background in their respective practice areas.</p>
+      </div>
+
+      <div id="ind-list" class="relative border-t" style="border-color:var(--line)" data-reveal>
+        <!-- Popover Image Preview Frame -->
+        <div id="ind-preview" class="hidden lg:block" aria-hidden="true">
+          <img data-prev="fin" class="on"
+            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80"
+            alt="Financial services architecture">
+          <img data-prev="tech"
+            src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80"
+            alt="Technology hardware preview">
+          <img data-prev="health"
+            src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80"
+            alt="Healthcare science lab">
+          <img data-prev="energy"
+            src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=800&q=80"
+            alt="Clean energy wind power">
+          <img data-prev="consumer"
+            src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80"
+            alt="Consumer goods preview">
+          <img data-prev="public"
+            src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80"
+            alt="Public sector global infrastructure">
+        </div>
+
+        <a href="#contact" data-ind="fin"
+          class="ind-row group flex items-center gap-4 sm:gap-8 py-5 sm:py-7 border-b transition-colors duration-300 hover:px-3"
+          style="border-color:var(--line)">
+          <span class="font-mono text-[11px] w-6 sm:w-8 flex-none" style="color:var(--electric)">A</span>
+          <span
+            class="font-display text-xl sm:text-3xl lg:text-4xl font-light flex-1 transition-colors duration-300 group-hover:italic">Financial
+            Services & Fintech</span>
+          <span class="hidden sm:flex items-center gap-2 flex-none"><span class="chip text-[10px]">128
+              mandates</span></span>
+          <svg class="flex-none transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-rotate-45"
+            width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--electric)" stroke-width="1.8"
+            stroke-linecap="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+        <a href="#contact" data-ind="tech"
+          class="ind-row group flex items-center gap-4 sm:gap-8 py-5 sm:py-7 border-b transition-colors duration-300 hover:px-3"
+          style="border-color:var(--line)">
+          <span class="font-mono text-[11px] w-6 sm:w-8 flex-none" style="color:var(--electric)">B</span>
+          <span
+            class="font-display text-xl sm:text-3xl lg:text-4xl font-light flex-1 transition-colors duration-300 group-hover:italic">Technology,
+            Software & AI</span>
+          <span class="hidden sm:flex items-center gap-2 flex-none"><span class="chip text-[10px]">104
+              mandates</span></span>
+          <svg class="flex-none transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-rotate-45"
+            width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--electric)" stroke-width="1.8"
+            stroke-linecap="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+        <a href="#contact" data-ind="health"
+          class="ind-row group flex items-center gap-4 sm:gap-8 py-5 sm:py-7 border-b transition-colors duration-300 hover:px-3"
+          style="border-color:var(--line)">
+          <span class="font-mono text-[11px] w-6 sm:w-8 flex-none" style="color:var(--electric)">C</span>
+          <span
+            class="font-display text-xl sm:text-3xl lg:text-4xl font-light flex-1 transition-colors duration-300 group-hover:italic">Healthcare
+            & Life Sciences</span>
+          <span class="hidden sm:flex items-center gap-2 flex-none"><span class="chip text-[10px]">86
+              mandates</span></span>
+          <svg class="flex-none transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-rotate-45"
+            width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--electric)" stroke-width="1.8"
+            stroke-linecap="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+        <a href="#contact" data-ind="energy"
+          class="ind-row group flex items-center gap-4 sm:gap-8 py-5 sm:py-7 border-b transition-colors duration-300 hover:px-3"
+          style="border-color:var(--line)">
+          <span class="font-mono text-[11px] w-6 sm:w-8 flex-none" style="color:var(--electric)">D</span>
+          <span
+            class="font-display text-xl sm:text-3xl lg:text-4xl font-light flex-1 transition-colors duration-300 group-hover:italic">Energy
+            & Industrial Infrastructure</span>
+          <span class="hidden sm:flex items-center gap-2 flex-none"><span class="chip text-[10px]">72
+              mandates</span></span>
+          <svg class="flex-none transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-rotate-45"
+            width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--electric)" stroke-width="1.8"
+            stroke-linecap="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+        <a href="#contact" data-ind="consumer"
+          class="ind-row group flex items-center gap-4 sm:gap-8 py-5 sm:py-7 border-b transition-colors duration-300 hover:px-3"
+          style="border-color:var(--line)">
+          <span class="font-mono text-[11px] w-6 sm:w-8 flex-none" style="color:var(--electric)">E</span>
+          <span
+            class="font-display text-xl sm:text-3xl lg:text-4xl font-light flex-1 transition-colors duration-300 group-hover:italic">Consumer,
+            Retail & Brands</span>
+          <span class="hidden sm:flex items-center gap-2 flex-none"><span class="chip text-[10px]">58
+              mandates</span></span>
+          <svg class="flex-none transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-rotate-45"
+            width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--electric)" stroke-width="1.8"
+            stroke-linecap="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+        <a href="#contact" data-ind="public"
+          class="ind-row group flex items-center gap-4 sm:gap-8 py-5 sm:py-7 border-b transition-colors duration-300 hover:px-3"
+          style="border-color:var(--line)">
+          <span class="font-mono text-[11px] w-6 sm:w-8 flex-none" style="color:var(--electric)">F</span>
+          <span
+            class="font-display text-xl sm:text-3xl lg:text-4xl font-light flex-1 transition-colors duration-300 group-hover:italic">Sovereign
+            Funds & Public Sector</span>
+          <span class="hidden sm:flex items-center gap-2 flex-none"><span class="chip text-[10px]">32
+              mandates</span></span>
+          <svg class="flex-none transition-transform duration-300 group-hover:translate-x-1.5 group-hover:-rotate-45"
+            width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--electric)" stroke-width="1.8"
+            stroke-linecap="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     08 · Cross-Border Recruitment Support (Fanned Cards)
+     ============================================================ -->
+  <section class="py-16 sm:py-24 lg:py-36 scroll-mt-24 relative" id="svc-recruitment" style="background:var(--bg-2)">
+    <div class="wrap">
+      <div class="flex items-baseline justify-between gap-4 flex-wrap mb-8 sm:mb-12">
+        <div>
+          <p class="eyebrow" data-reveal>06 — Talent Acquisition</p>
+          <h2 class="font-display font-light text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] mt-4 sm:mt-5" data-reveal>
+            Cross-Border <em class="italic" style="color:var(--royal)">Recruitment Support</em>
+          </h2>
+        </div>
+        <span class="chip" data-reveal>Executive & Specialized</span>
+      </div>
+
+      <div
+        class="s2-panel relative overflow-hidden grid lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 p-6 sm:p-10 lg:p-14 border rounded-2xl shadow-soft"
+        style="border-color:var(--line);background:var(--surface)" data-reveal>
+        <div class="s2-fan relative lg:col-span-5 flex items-center justify-center">
+          <article class="fan-card" style="background:var(--surface-2);border-color:var(--line)">
+            <span class="font-mono text-[9.5px] uppercase tracking-[0.2em]"
+              style="color:var(--ink-2)">Streamlined</span>
+            <span class="font-display text-xl sm:text-2xl font-medium mt-1">Rigorous Vetting</span>
+          </article>
+          <article class="fan-card" style="background:var(--surface-2);border-color:var(--line)">
+            <span class="font-mono text-[9.5px] uppercase tracking-[0.2em]" style="color:var(--ink-2)">Global</span>
+            <span class="font-display text-xl sm:text-2xl font-medium mt-1">Talent Acquisition</span>
+          </article>
+          <article class="fan-card" style="background:var(--surface);border-color:var(--line-strong)">
+            <span class="font-mono text-[9.5px] uppercase tracking-[0.2em]"
+              style="color:var(--electric)">Empowered</span>
+            <span class="font-display text-xl sm:text-2xl font-medium mt-1">Leadership Pods</span>
+          </article>
+        </div>
+        <div class="lg:col-span-7 flex flex-col justify-center gap-5 sm:gap-6">
+          <p class="text-[15px] sm:text-[16.5px] leading-relaxed max-w-xl" style="color:var(--ink-2)">
+            Elevate your global workforce through Cross-Border Recruitment Support. Streamlined talent scouting,
+            forensic credentialing, and multi-country placement across 32 jurisdictions — positioning your executive and
+            technical bench for sustained advantage.
+          </p>
+          <div class="flex flex-wrap gap-2.5 sm:gap-3 my-1">
+            <div
+              class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[11px] font-mono uppercase tracking-wider"
+              style="border-color:var(--line);color:var(--ink-2);background:var(--surface-2)">
+              <span class="w-4 h-4 rounded-full flex items-center justify-center font-bold text-[9px] text-white"
+                style="background:var(--royal)">A</span>
+              <span>Mandate Brief</span>
+            </div>
+            <div
+              class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[11px] font-mono uppercase tracking-wider"
+              style="border-color:var(--line);color:var(--ink-2);background:var(--surface-2)">
+              <span class="w-4 h-4 rounded-full flex items-center justify-center font-bold text-[9px] text-white"
+                style="background:var(--electric)">B</span>
+              <span>Global Sourcing</span>
+            </div>
+            <div
+              class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-[11px] font-mono uppercase tracking-wider"
+              style="border-color:var(--line);color:var(--ink-2);background:var(--surface-2)">
+              <span class="w-4 h-4 rounded-full flex items-center justify-center font-bold text-[9px] text-white"
+                style="background:var(--cyan)">C</span>
+              <span>Executive Placement</span>
+            </div>
+          </div>
+          <div class="pt-2 flex flex-wrap items-center gap-4 sm:gap-6">
+            <a href="#contact" class="btn btn-primary !px-6 sm:!px-7 !py-3 w-full sm:w-auto" data-magnetic><span
+                class="btn-sheen"></span>Talk to our search team
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+            <a href="#work" class="btn-link">View case placements
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round">
+                <path d="M7 17 17 7M9 7h8v8" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     09 · Global Network (Interactive World Map & Local Clocks)
+     ============================================================ -->
+  <section id="network" class="py-16 sm:py-24 lg:py-36 scroll-mt-24 relative"
+    style="background:var(--navy);color:#F5F0E6">
+    <div class="absolute inset-0 opacity-[0.14] blueprint"></div>
+    <div class="absolute inset-0 pointer-events-none"
+      style="background:radial-gradient(900px 500px at 80% 10%,var(--glow) 0%,transparent 60%)"></div>
+    <div class="wrap relative">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end mb-10 sm:mb-14">
+        <div class="lg:col-span-7">
+          <p class="eyebrow !text-ivory/50" data-reveal>07 — Global Coordination</p>
+          <h2 class="font-display font-light text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] mt-4 sm:mt-5" data-reveal>
+            Four time zones.<br>One unified <em class="italic" style="color:var(--cyan)">bench</em>.</h2>
+        </div>
+        <div class="lg:col-span-5" data-reveal>
+          <svg viewBox="0 0 560 150" class="w-full" fill="none" aria-hidden="true">
+            <path class="arc-path" d="M60 110 C 150 20, 250 20, 300 78" stroke="var(--cyan)" stroke-width="1.4"
+              stroke-dasharray="4 5" opacity=".8" />
+            <path class="arc-path" d="M300 78 C 360 30, 440 30, 480 66" stroke="var(--electric)" stroke-width="1.4"
+              stroke-dasharray="4 5" opacity=".8" />
+            <path class="arc-path" d="M60 110 C 200 150, 380 150, 480 66" stroke="rgba(245,240,230,.35)"
+              stroke-width="1.2" stroke-dasharray="2 6" />
+            <g>
+              <circle cx="60" cy="110" r="5" fill="var(--cyan)" />
+              <circle cx="60" cy="110" r="11" stroke="var(--cyan)" opacity=".4">
+                <animate attributeName="r" values="7;16;7" dur="3s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values=".5;0;.5" dur="3s" repeatCount="indefinite" />
+              </circle><text x="60" y="136" text-anchor="middle" font-size="10" fill="rgba(245,240,230,.7)"
+                font-family="IBM Plex Mono">NEW YORK</text>
+            </g>
+            <g>
+              <circle cx="300" cy="78" r="5" fill="var(--electric)" />
+              <circle cx="300" cy="78" r="11" stroke="var(--electric)" opacity=".4">
+                <animate attributeName="r" values="7;16;7" dur="3s" begin=".7s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values=".5;0;.5" dur="3s" begin=".7s" repeatCount="indefinite" />
+              </circle><text x="300" y="52" text-anchor="middle" font-size="10" fill="rgba(245,240,230,.7)"
+                font-family="IBM Plex Mono">LONDON</text>
+            </g>
+            <g>
+              <circle cx="480" cy="66" r="5" fill="var(--cyan)" />
+              <circle cx="480" cy="66" r="11" stroke="var(--cyan)" opacity=".4">
+                <animate attributeName="r" values="7;16;7" dur="3s" begin="1.4s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values=".5;0;.5" dur="3s" begin="1.4s" repeatCount="indefinite" />
+              </circle><text x="474" y="40" text-anchor="middle" font-size="10" fill="rgba(245,240,230,.7)"
+                font-family="IBM Plex Mono">DUBAI</text>
+            </g>
+            <g>
+              <circle cx="530" cy="112" r="5" fill="var(--electric)" />
+              <circle cx="530" cy="112" r="11" stroke="var(--electric)" opacity=".4">
+                <animate attributeName="r" values="7;16;7" dur="3s" begin="2.1s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values=".5;0;.5" dur="3s" begin="2.1s" repeatCount="indefinite" />
+              </circle><text x="516" y="138" text-anchor="middle" font-size="10" fill="rgba(245,240,230,.7)"
+                font-family="IBM Plex Mono">SINGAPORE</text>
+            </g>
+          </svg>
+          <p class="text-[13.5px] sm:text-[14.5px] leading-relaxed text-ivory/60 mt-4 max-w-md">Our continuous global
+            bench operates with real-time handoffs between Americas, EMEA, and APAC hubs.</p>
+        </div>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-8">
+        <!-- Office Switcher Buttons -->
+        <div class="lg:col-span-5 flex flex-col" data-reveal>
+          <button data-office="ny" data-lat="40.7484" data-lng="-73.9857" data-name="New York — Global HQ"
+            data-addr="350 Fifth Avenue, Suite 4810, New York, NY 10118"
+            class="office-btn group text-left border-b py-5 sm:py-6 px-3 sm:px-4 -mx-3 sm:-mx-4 transition-colors duration-300"
+            style="border-color:rgba(245,240,230,.14)">
+            <div class="flex items-center justify-between">
+              <span class="font-display text-xl sm:text-2xl">New York <span
+                  class="font-mono text-[9.5px] uppercase tracking-[0.2em] align-middle ml-2 px-2 py-0.5 rounded-full"
+                  style="background:var(--cyan);color:var(--navy)">HQ</span></span>
+              <span class="office-clock font-mono text-xs sm:text-sm text-ivory/60"
+                data-tz="America/New_York">--:--</span>
+            </div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-ivory/45 mt-1.5">350 Fifth Avenue, Suite
+              4810 · 40.7484° N, 73.9857° W</p>
+            <span class="office-bar block h-[2px] mt-3 origin-left scale-x-0 transition-transform duration-500"
+              style="background:linear-gradient(90deg,var(--cyan),var(--electric))"></span>
+          </button>
+          <button data-office="ldn" data-lat="51.5178" data-lng="-0.0824" data-name="London — EMEA"
+            data-addr="1 Finsbury Avenue, London EC2M 2PF, United Kingdom"
+            class="office-btn group text-left border-b py-5 sm:py-6 px-3 sm:px-4 -mx-3 sm:-mx-4 transition-colors duration-300"
+            style="border-color:rgba(245,240,230,.14)">
+            <div class="flex items-center justify-between">
+              <span class="font-display text-xl sm:text-2xl">London <span
+                  class="font-mono text-[9.5px] uppercase tracking-[0.2em] align-middle ml-2 text-ivory/40">EMEA</span></span>
+              <span class="office-clock font-mono text-xs sm:text-sm text-ivory/60" data-tz="Europe/London">--:--</span>
+            </div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-ivory/45 mt-1.5">1 Finsbury Avenue, EC2M ·
+              51.5178° N, 0.0824° W</p>
+            <span class="office-bar block h-[2px] mt-3 origin-left scale-x-0 transition-transform duration-500"
+              style="background:linear-gradient(90deg,var(--cyan),var(--electric))"></span>
+          </button>
+          <button data-office="dxb" data-lat="25.2138" data-lng="55.2787" data-name="Dubai — MENA"
+            data-addr="Gate Avenue, Level 4, DIFC, Dubai, UAE"
+            class="office-btn group text-left border-b py-5 sm:py-6 px-3 sm:px-4 -mx-3 sm:-mx-4 transition-colors duration-300"
+            style="border-color:rgba(245,240,230,.14)">
+            <div class="flex items-center justify-between">
+              <span class="font-display text-xl sm:text-2xl">Dubai <span
+                  class="font-mono text-[9.5px] uppercase tracking-[0.2em] align-middle ml-2 text-ivory/40">MENA</span></span>
+              <span class="office-clock font-mono text-xs sm:text-sm text-ivory/60" data-tz="Asia/Dubai">--:--</span>
+            </div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-ivory/45 mt-1.5">Gate Avenue, DIFC ·
+              25.2138° N, 55.2787° E</p>
+            <span class="office-bar block h-[2px] mt-3 origin-left scale-x-0 transition-transform duration-500"
+              style="background:linear-gradient(90deg,var(--cyan),var(--electric))"></span>
+          </button>
+          <button data-office="sg" data-lat="1.2793" data-lng="103.8546" data-name="Singapore — APAC"
+            data-addr="8 Marina Boulevard, #22-01, Marina Bay Financial Centre, Singapore 018981"
+            class="office-btn group text-left border-b py-5 sm:py-6 px-3 sm:px-4 -mx-3 sm:-mx-4 transition-colors duration-300"
+            style="border-color:rgba(245,240,230,.14)">
+            <div class="flex items-center justify-between">
+              <span class="font-display text-xl sm:text-2xl">Singapore <span
+                  class="font-mono text-[9.5px] uppercase tracking-[0.2em] align-middle ml-2 text-ivory/40">APAC</span></span>
+              <span class="office-clock font-mono text-xs sm:text-sm text-ivory/60"
+                data-tz="Asia/Singapore">--:--</span>
+            </div>
+            <p class="font-mono text-[10px] uppercase tracking-[0.14em] text-ivory/45 mt-1.5">8 Marina Boulevard, MBFC ·
+              1.2793° N, 103.8546° E</p>
+            <span class="office-bar block h-[2px] mt-3 origin-left scale-x-0 transition-transform duration-500"
+              style="background:linear-gradient(90deg,var(--cyan),var(--electric))"></span>
+          </button>
+          <p class="mt-4 font-mono text-[9.5px] uppercase tracking-[0.2em] text-ivory/40">Local office times displayed
+            live.</p>
+        </div>
+
+        <!-- Live Interactive Map Frame -->
+        <div class="lg:col-span-7" data-reveal>
+          <div class="relative rounded-xl overflow-hidden border" style="border-color:rgba(245,240,230,.16)">
+            <span class="tick top-3 left-3 border-t-2 border-l-2"></span>
+            <span class="tick top-3 right-3 border-t-2 border-r-2"></span>
+            <span class="tick bottom-3 left-3 border-b-2 border-l-2"></span>
+            <span class="tick bottom-3 right-3 border-b-2 border-r-2"></span>
+            <div class="relative aspect-[4/3] sm:aspect-[16/10] bg-navy-deep">
+              <iframe id="office-map" title="Hirely office location map"
+                src="https://www.google.com/maps?q=40.7484,-73.9857&z=15&output=embed&hl=en"
+                class="absolute inset-0 w-full h-full transition-opacity duration-500"
+                style="border:0;filter:saturate(.85)" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                allowfullscreen></iframe>
+            </div>
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 p-4 sm:px-5 sm:py-4"
+              style="background:rgba(8,18,38,.92)">
+              <div>
+                <p id="map-name" class="font-display text-base sm:text-lg">New York — Global HQ</p>
+                <p id="map-addr"
+                  class="font-mono text-[9.5px] sm:text-[10.5px] uppercase tracking-[0.12em] text-ivory/50 mt-0.5">350
+                  Fifth Avenue, Suite 4810, New York, NY 10118</p>
+              </div>
+              <a id="map-open" href="https://www.google.com/maps?q=40.7484,-73.9857" target="_blank" rel="noopener"
+                class="btn btn-ghost !text-ivory !py-2 !px-4 !text-[11px] self-end sm:self-auto"
+                style="border-color:rgba(245,240,230,.3)">Open Maps
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round">
+                  <path d="M7 17 17 7M9 7h8v8" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     10 · Selected Outcomes & Case Studies
+     ============================================================ -->
+  <section id="work" class="py-16 sm:py-24 lg:py-36 scroll-mt-24 relative">
+    <span
+      class="ghost-num font-display absolute  right-4 sm:right-8 top-0 text-[14vw] sm:text-[18vw] leading-none select-none hidden md:block"
+      data-parallax="-0.08">08</span>
+    <div class="wrap">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-end mb-14 sm:mb-20">
+        <div class="lg:col-span-7">
+          <p class="eyebrow" data-reveal>08 — Verified Results</p>
+          <h2 class="font-display font-light text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] mt-4 sm:mt-5" data-reveal>
+            Work that <em class="italic" style="color:var(--royal)">outlives</em> the engagement.</h2>
+        </div>
+        <p class="lg:col-span-5 text-[14.5px] sm:text-[15.5px] leading-relaxed" style="color:var(--ink-2)" data-reveal>
+          Three cross-border mandates and empirical results published with partner authorization.</p>
+      </div>
+
+      <!-- Case Study 01 -->
+      <article class="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center mb-20 sm:mb-28 lg:mb-36 relative">
+        <span
+          class="ghost-num font-display absolute -top-16 -left-12 text-[18vw] lg:text-[14vw] leading-none select-none"
+          style="z-index: 120;" data-parallax="-0.1">01</span>
+        <div class="lg:col-span-7 relative" data-reveal data-cursor data-cursor-text="View">
+          <div class="overflow-hidden rounded-xl border shadow-soft group" style="border-color:var(--line)">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80"
+              alt="Osprey Bank executive headquarters in London"
+              class="w-full h-[240px] sm:h-[360px] lg:h-[400px] object-cover transition-transform duration-[1.8s] ease-out group-hover:scale-[1.04]"
+              data-parallax-img />
+          </div>
+          <div
+            class="absolute -bottom-4 right-3 sm:-bottom-6 sm:right-6 card-surface px-4 py-2.5 sm:px-6 sm:py-3.5 shadow-lift">
+            <p class="font-display text-2xl sm:text-3xl font-semibold">2.1<span style="color:var(--electric)">×</span>
+            </p>
+            <p class="font-mono text-[9px] sm:text-[9.5px] uppercase tracking-[0.18em]" style="color:var(--ink-2)">
+              Succession coverage</p>
+          </div>
+        </div>
+        <div class="lg:col-span-5 lg:pl-4" data-reveal>
+          <div class="flex flex-wrap gap-2 mb-4"><span class="chip text-[10px]">Financial Services</span><span
+              class="chip text-[10px]">London</span><span class="chip text-[10px]">2023 — 2025</span></div>
+          <h3 class="font-display text-2xl sm:text-3xl font-light leading-tight">Rebuilding a 200-year-old bank's
+            leadership pipeline.</h3>
+          <p class="mt-3.5 text-[14.5px] sm:text-[15.5px] leading-relaxed" style="color:var(--ink-2)">Faced with
+            simultaneous C-suite retirements, we directed 14 retained searches across three continents, deployed
+            transparent succession frameworks, and stabilized operational continuity.</p>
+          <ul class="mt-5 space-y-2 text-[14px] font-medium">
+            <li class="flex gap-2.5"><span style="color:var(--electric)">✦</span>14 C-suite placements, 94% retention
+              rate</li>
+            <li class="flex gap-2.5"><span style="color:var(--electric)">✦</span>Board leadership confidence +41 pts
+            </li>
+            <li class="flex gap-2.5"><span style="color:var(--electric)">✦</span>Zero critical seats vacant &gt;6 weeks
+            </li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-flex items-center gap-2.5 font-semibold text-[13.5px] group"
+            style="color:var(--royal)">Read the engagement study <svg
+              class="transition-transform duration-300 group-hover:translate-x-1" width="15" height="15"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg></a>
+        </div>
+      </article>
+
+      <!-- Case Study 02 (Alternating Grid) -->
+      <article class="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center mb-20 sm:mb-28 lg:mb-36 relative">
+        <span
+          class="ghost-num font-display absolute -top-16 -right-12 text-[18vw] lg:text-[14vw] leading-none select-none"
+          data-parallax="-0.1" style="z-index: 120;">02</span>
+        <div class="lg:col-span-5 lg:pr-4 lg:order-1 order-2" data-reveal>
+          <div class="flex flex-wrap gap-2 mb-4"><span class="chip text-[10px]">Healthcare & Life Sciences</span><span
+              class="chip text-[10px]">Boston · Singapore</span></div>
+          <h3 class="font-display text-2xl sm:text-3xl font-light leading-tight">From laboratory breakthrough to
+            multi-region operating model.</h3>
+          <p class="mt-3.5 text-[14.5px] sm:text-[15.5px] leading-relaxed" style="color:var(--ink-2)">Helix Biotech
+            required rapid scaling across nine international markets. We architected their cross-border talent structure
+            and appointed 31 principal scientists and commercial leads.</p>
+          <ul class="mt-5 space-y-2 text-[14px] font-medium">
+            <li class="flex gap-2.5"><span style="color:var(--electric)">✦</span>9 global markets established in 18
+              months</li>
+            <li class="flex gap-2.5"><span style="color:var(--electric)">✦</span>40% reduction in critical R&D
+              time-to-hire</li>
+            <li class="flex gap-2.5"><span style="color:var(--electric)">✦</span>$180M operational cost avoidance</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-flex items-center gap-2.5 font-semibold text-[13.5px] group"
+            style="color:var(--royal)">Read the engagement study <svg
+              class="transition-transform duration-300 group-hover:translate-x-1" width="15" height="15"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg></a>
+        </div>
+        <div class="lg:col-span-7 lg:order-2 order-1 relative" data-reveal data-cursor data-cursor-text="View">
+          <div class="overflow-hidden rounded-xl border shadow-soft group" style="border-color:var(--line)">
+            <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&q=80"
+              alt="Helix Biotech clean scientific research laboratory"
+              class="w-full h-[240px] sm:h-[360px] lg:h-[400px] object-cover transition-transform duration-[1.8s] ease-out group-hover:scale-[1.04]"
+              data-parallax-img />
+          </div>
+          <div
+            class="absolute -bottom-4 left-3 sm:-bottom-6 sm:left-6 card-surface px-4 py-2.5 sm:px-6 sm:py-3.5 shadow-lift">
+            <p class="font-display text-2xl sm:text-3xl font-semibold">9<span style="color:var(--cyan)"> mkts</span></p>
+            <p class="font-mono text-[9px] sm:text-[9.5px] uppercase tracking-[0.18em]" style="color:var(--ink-2)">
+              Launched in 18 months</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Case Study 03 -->
+      <article class="grid lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-12 items-center relative">
+        <span
+          class="ghost-num font-display absolute -top-16 -left-12 text-[18vw] lg:text-[14vw] leading-none select-none"
+          data-parallax="-0.1" style="z-index: 120;">03</span>
+        <div class="lg:col-span-7 relative" data-reveal data-cursor data-cursor-text="View">
+          <div class="overflow-hidden rounded-xl border shadow-soft group" style="border-color:var(--line)">
+            <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=80"
+              alt="Offshore clean energy wind farm at dawn"
+              class="w-full h-[240px] sm:h-[360px] lg:h-[400px] object-cover transition-transform duration-[1.8s] ease-out group-hover:scale-[1.04]"
+              data-parallax-img />
+          </div>
+          <div
+            class="absolute -bottom-4 right-3 sm:-bottom-6 sm:right-6 card-surface px-4 py-2.5 sm:px-6 sm:py-3.5 shadow-lift">
+            <p class="font-display text-2xl sm:text-3xl font-semibold">$310<span style="color:var(--electric)">M</span>
+            </p>
+            <p class="font-mono text-[9px] sm:text-[9.5px] uppercase tracking-[0.18em]" style="color:var(--ink-2)">AI
+              value roadmap</p>
+          </div>
+        </div>
+        <div class="lg:col-span-5 lg:pl-4" data-reveal>
+          <div class="flex flex-wrap gap-2 mb-4"><span class="chip text-[10px]">Energy & Industrials</span><span
+              class="chip text-[10px]">Dubai · Global</span></div>
+          <h3 class="font-display text-2xl sm:text-3xl font-light leading-tight">An energy major's enterprise AI
+            operating model.</h3>
+          <p class="mt-3.5 text-[14.5px] sm:text-[15.5px] leading-relaxed" style="color:var(--ink-2)">Consolidating 60
+            fragmented experiments into an 11-use-case roadmap with auditable compliance and finance-verified reporting.
+          </p>
+          <ul class="mt-5 space-y-2 text-[14px] font-medium">
+            <li class="flex gap-2.5"><span style="color:var(--electric)">✦</span>$310M roadmap value, $96M captured Y1
+            </li>
+            <li class="flex gap-2.5"><span style="color:var(--electric)">✦</span>11 production solutions deployed</li>
+            <li class="flex gap-2.5"><span style="color:var(--electric)">✦</span>1,400 team members upskilled</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-flex items-center gap-2.5 font-semibold text-[13.5px] group"
+            style="color:var(--royal)">Read the engagement study <svg
+              class="transition-transform duration-300 group-hover:translate-x-1" width="15" height="15"
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg></a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     11 · Staff Outsourcing
+     ============================================================ -->
+  <section class="py-16 sm:py-24 lg:py-36 scroll-mt-24 relative overflow-hidden" id="svc-outsourcing"
+    style="background:var(--bg-2)">
+    <div class="outs-word" aria-hidden="true">OUTSOURCE</div>
+    <div class="wrap relative grid lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-12 items-center">
+      <div class="lg:col-span-6">
+        <p class="eyebrow" data-reveal>09 — STAFF OUTSOURCING</p>
+        <h2 class="font-display font-light text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] mt-4 mb-4 sm:mb-6"
+          data-reveal>Optimize efficiency.<br><em class="italic" style="color:var(--royal)">Own your focus.</em></h2>
+        <p class="text-[15px] sm:text-[16px] leading-relaxed max-w-md mb-6 sm:mb-8" style="color:var(--ink-2)"
+          data-reveal>Access premier international talent across proven global hubs, streamline operational
+          expenditures, and allow executive focus to remain anchored on product and market leadership.</p>
+        <a href="#contact" class="btn-link" data-reveal>Build your team
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+      <div class="lg:col-span-6">
+        <div class="outs-cols shadow-soft" data-reveal>
+          <div class="outs-item">
+            <div class="oi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              </svg></div>
+            <h4 class="font-display font-semibold text-base sm:text-lg mb-1">Global Talent Hubs</h4>
+            <p class="text-[13px] sm:text-[13.5px] leading-relaxed" style="color:var(--ink-2)">Vetted remote
+              professionals deployed smoothly without geographical constraints.</p>
+          </div>
+          <div class="outs-item">
+            <div class="oi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+              </svg></div>
+            <h4 class="font-display font-semibold text-base sm:text-lg mb-1">Capital Leverage</h4>
+            <p class="text-[13px] sm:text-[13.5px] leading-relaxed" style="color:var(--ink-2)">Optimized operational
+              cost structures through unified remote staffing models.</p>
+          </div>
+          <div class="outs-item">
+            <div class="oi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 6v6l4 2" />
+              </svg></div>
+            <h4 class="font-display font-semibold text-base sm:text-lg mb-1">Core Mission Focus</h4>
+            <p class="text-[13px] sm:text-[13.5px] leading-relaxed" style="color:var(--ink-2)">We orchestrate sourcing,
+              legal compliance, and onboarding while you drive market growth.</p>
+          </div>
+        </div>
+        <p class="outs-statement" data-reveal>We handle the staffing. <em>You handle the growth.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     12 · In Their Words (Testimonial Stage)
+     ============================================================ -->
+  <section id="voices" class="py-16 sm:py-24 lg:py-36 scroll-mt-24 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none"
+      style="background: radial-gradient(760px 460px at 85% 20%, rgb(235 227 209) 0%, transparent 60%);"></div>
+    <svg class="absolute right-[4%] top-[10%] opacity-[0.22] hidden lg:block" width="520" height="520"
+      viewBox="0 0 520 520" fill="none" aria-hidden="true">
+      <!-- Outer Orbit Ring (Radius: 230) - Clockwise -->
+      <g class="orbit-spin">
+        <circle cx="260" cy="260" r="230" stroke="var(--line-strong)" stroke-dasharray="3 8" />
+        <circle cx="260" cy="30" r="7.5" fill="var(--electric)" />
+        <circle cx="490" cy="260" r="5" fill="var(--cyan)" />
+        <circle cx="260" cy="490" r="6.5" fill="var(--royal)" />
+        <circle cx="97" cy="423" r="4.5" fill="var(--cyan)" />
+      </g>
+      <!-- Middle Orbit Ring (Radius: 160) - Counter-Clockwise -->
+      <g class="orbit-spin-rev">
+        <circle cx="260" cy="260" r="160" stroke="var(--line-strong)" stroke-dasharray="2 6" />
+        <circle cx="420" cy="260" r="6" fill="var(--cyan)" />
+        <circle cx="147" cy="147" r="5" fill="var(--electric)" />
+        <circle cx="260" cy="420" r="5.5" fill="var(--cyan)" />
+        <circle cx="100" cy="260" r="4" fill="var(--royal)" />
+      </g>
+      <!-- Inner Orbit Ring (Radius: 95) - Clockwise -->
+      <g class="orbit-spin">
+        <circle cx="260" cy="260" r="95" stroke="var(--line-strong)" stroke-dasharray="2 5" />
+        <circle cx="260" cy="165" r="5.5" fill="var(--electric)" />
+        <circle cx="355" cy="260" r="4.5" fill="var(--cyan)" />
+        <circle cx="193" cy="327" r="5" fill="var(--electric)" />
+      </g>
+    </svg>
+
+    <span
+      class="ghost-num font-display absolute  right-4 sm:right-8 top-0 text-[14vw] sm:text-[18vw] leading-none select-none hidden md:block"
+      data-parallax="-0.08">10</span>
+
+    <div class="wrap relative grid lg:grid-cols-12 gap-8 sm:gap-12">
+      <div class="lg:col-span-4 flex flex-col justify-between">
+        <div>
+          <p class="eyebrow" data-reveal>10 — Testimonials</p>
+          <h2 class="font-display font-light text-[clamp(2rem,3.6vw,3.2rem)] leading-[1.06] mt-4 sm:mt-5" data-reveal>
+            The people who<br>signed the <em class="italic" style="color:var(--royal)">mandate</em>.</h2>
+        </div>
+        <div class="mt-8 lg:mt-0" data-reveal>
+          <div class="flex items-center gap-3.5 mb-4">
+            <button id="t-prev" data-magnetic aria-label="Previous testimonial"
+              class="w-11 h-11 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-colors duration-300 hover:!border-[var(--electric)] hover:text-[var(--electric)]"
+              style="border-color:var(--line-strong)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M19 12H5M11 6l-6 6 6 6" />
+              </svg></button>
+            <button id="t-next" data-magnetic aria-label="Next testimonial"
+              class="w-11 h-11 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-colors duration-300 hover:!border-[var(--electric)] hover:text-[var(--electric)]"
+              style="border-color:var(--line-strong)"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg></button>
+            <span class="font-mono text-[11px] sm:text-[12px] tracking-[0.2em] ml-2" style="color:var(--ink-2)"><span
+                id="t-idx">01</span> / 04</span>
+          </div>
+          <div class="h-[2.5px] w-36 sm:w-44 rounded-full overflow-hidden" style="background:var(--line-strong)">
+            <div id="t-bar" class="h-full origin-left rounded-full"
+              style="background:var(--electric);transform:scaleX(0)"></div>
+          </div>
+          <p class="font-mono text-[9.5px] uppercase tracking-[0.18em] mt-4" style="color:var(--ink-2)">Average client
+            tenure: 6.2 years</p>
+        </div>
+      </div>
+
+      <div id="t-stage" class="lg:col-span-8 relative min-h-[340px] sm:min-h-[300px] lg:min-h-[360px]" data-reveal
+        tabindex="0" aria-label="Client testimonials">
+        <svg class="absolute -top-6 -left-2 opacity-25" width="56" height="46" viewBox="0 0 70 56"
+          fill="var(--electric)" aria-hidden="true">
+          <path
+            d="M0 56V33.6C0 14.9 11.2 3.4 29.4 0l4.2 9.8C22.4 13.4 16.8 20 16.8 29.4h12.6V56H0Zm40.6 0V33.6C40.6 14.9 51.8 3.4 70 0l-4.2 9.8C63 13.4 57.4 20 57.4 29.4H70V56H40.6Z" />
+        </svg>
+
+        <!-- Slide 1 -->
+        <figure class="t-slide is-active flex flex-col justify-end h-full">
+          <blockquote class="font-display font-light italic text-[clamp(1.35rem,2.5vw,2.2rem)] leading-[1.28]">“Hirely
+            didn't give us a strategy deck — they gave us an organization that could execute one. Two years on, the
+            architecture they built still runs our agenda.”</blockquote>
+          <figcaption class="mt-6 sm:mt-8 flex items-center gap-3.5">
+            <span
+              class="w-11 h-11 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center font-mono text-[12px] font-medium"
+              style="background:var(--navy);color:var(--cyan)">EM</span>
+            <div>
+              <p class="font-bold text-[14.5px]">Elena Marsh</p>
+              <p class="font-mono text-[10.5px] uppercase tracking-[0.16em] mt-0.5" style="color:var(--ink-2)">Chief
+                Executive · Osprey Bank</p>
+            </div>
+          </figcaption>
+        </figure>
+
+        <!-- Slide 2 -->
+        <figure class="t-slide flex flex-col justify-end h-full">
+          <blockquote class="font-display font-light italic text-[clamp(1.35rem,2.5vw,2.2rem)] leading-[1.28]">“The only
+            advisors our board asks for by name. When the AI transformation question arrived, the only inquiry was
+            whether Hirely had capacity for our mandate.”</blockquote>
+          <figcaption class="mt-6 sm:mt-8 flex items-center gap-3.5">
+            <span
+              class="w-11 h-11 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center font-mono text-[12px] font-medium"
+              style="background:var(--royal);color:#F5F0E6">RM</span>
+            <div>
+              <p class="font-bold text-[14.5px]">Rajiv Menon</p>
+              <p class="font-mono text-[10.5px] uppercase tracking-[0.16em] mt-0.5" style="color:var(--ink-2)">Chairman
+                · Vantage Energy</p>
+            </div>
+          </figcaption>
+        </figure>
+
+        <!-- Slide 3 -->
+        <figure class="t-slide flex flex-col justify-end h-full">
+          <blockquote class="font-display font-light italic text-[clamp(1.35rem,2.5vw,2.2rem)] leading-[1.28]">“Six
+            months with Hirely accomplished what three years of internal committees couldn't. They advised us which
+            markets to avoid — saving millions in capital.”</blockquote>
+          <figcaption class="mt-6 sm:mt-8 flex items-center gap-3.5">
+            <span
+              class="w-11 h-11 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center font-mono text-[12px] font-medium"
+              style="background:var(--electric);color:#F5F0E6">AC</span>
+            <div>
+              <p class="font-bold text-[14.5px]">Dr. Amara Chen</p>
+              <p class="font-mono text-[10.5px] uppercase tracking-[0.16em] mt-0.5" style="color:var(--ink-2)">Chief
+                Operating Officer · Helix Biotech</p>
+            </div>
+          </figcaption>
+        </figure>
+
+        <!-- Slide 4 -->
+        <figure class="t-slide flex flex-col justify-end h-full">
+          <blockquote class="font-display font-light italic text-[clamp(1.35rem,2.5vw,2.2rem)] leading-[1.28]">“They
+            anticipate market shifts. Every search Hirely ran for our portfolio companies exceeded specifications — and
+            their strategic counsel protected our capital.”</blockquote>
+          <figcaption class="mt-6 sm:mt-8 flex items-center gap-3.5">
+            <span
+              class="w-11 h-11 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center font-mono text-[12px] font-medium"
+              style="background:var(--surface);color:var(--ink);border:1px solid var(--line-strong)">TK</span>
+            <div>
+              <p class="font-bold text-[14.5px]">Tobias Keller</p>
+              <p class="font-mono text-[10.5px] uppercase tracking-[0.16em] mt-0.5" style="color:var(--ink-2)">Managing
+                Partner · Meridian Capital</p>
+            </div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     13 · Field Notes & Insights
+     ============================================================ -->
+  <section id="insights" class="py-16 sm:py-24 lg:py-36 scroll-mt-24 relative" style="background:var(--bg-2)">
+    <div class="wrap">
+      <div class="flex flex-wrap items-end justify-between gap-4 mb-10 sm:mb-14">
+        <div>
+          <p class="eyebrow" data-reveal>11 — Field Notes</p>
+          <h2 class="font-display font-light text-[clamp(2.1rem,4vw,3.6rem)] leading-[1.06] mt-4 sm:mt-5" data-reveal>
+            Thinking, published<br>before it's <em class="italic" style="color:var(--royal)">safe</em>.</h2>
+        </div>
+        <a href="#contact" class="btn btn-ghost !text-xs sm:!text-sm" data-magnetic data-reveal>The full library <svg
+            width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round">
+            <path d="M7 17 17 7M9 7h8v8" />
+          </svg></a>
+      </div>
+
+      <div class="grid lg:grid-cols-12 gap-6 sm:gap-8">
+        <a href="#contact" class="lg:col-span-7 group relative overflow-hidden rounded-xl border block shadow-soft"
+          style="border-color:var(--line)" data-reveal data-cursor data-cursor-text="Read">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=1200&q=80"
+            alt="Global connected networks representing 2026 Leadership Index"
+            class="w-full h-[280px] sm:h-[380px] lg:h-[440px] object-cover transition-transform duration-[1.8s] ease-out group-hover:scale-[1.04]" />
+          <div class="absolute inset-0"
+            style="background:linear-gradient(to top,rgba(8,18,38,.94) 0%,rgba(8,18,38,.35) 60%,transparent 100%)">
+          </div>
+          <div class="absolute bottom-0 inset-x-0 p-5 sm:p-8 text-ivory">
+            <div class="flex flex-wrap gap-2 mb-3"><span class="chip !border-transparent !text-navy !text-[10px]"
+                style="background:var(--cyan)">Flagship Report</span><span
+                class="chip !border-ivory/25 !bg-transparent !text-ivory/80 !text-[10px]">Q3 2026</span></div>
+            <h3 class="font-display font-light text-xl sm:text-3xl leading-tight max-w-xl">The 2026 Global Leadership
+              Index: where the bench is breaking.</h3>
+            <p class="mt-2.5 text-[13.5px] sm:text-[14px] text-ivory/70 max-w-lg">4,200 board directors across 32
+              countries on succession telemetry, AI operationalization and high-stakes leadership retention.</p>
+            <span class="mt-4 inline-flex items-center gap-2 font-semibold text-[13px]"
+              style="color:var(--cyan)">Download the report <svg
+                class="transition-transform duration-300 group-hover:translate-x-1" width="14" height="14"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg></span>
+          </div>
+        </a>
+
+        <div class="lg:col-span-5 flex flex-col" data-reveal>
+          <a href="#contact"
+            class="group flex items-start gap-4 sm:gap-6 py-5 sm:py-6 border-t transition-all duration-300 hover:pl-2"
+            style="border-color:var(--line)">
+            <span class="font-mono text-[10.5px] pt-1 w-16 sm:w-20 flex-none" style="color:var(--ink-2)">AUG 2026</span>
+            <div class="flex-1">
+              <p class="font-mono text-[9.5px] uppercase tracking-[0.18em] mb-1" style="color:var(--electric)">AI &
+                Strategy</p>
+              <h3 class="font-display text-lg sm:text-xl leading-snug group-hover:italic transition-all">AI won't
+                replace your operating model. It will expose it.</h3>
+            </div>
+            <svg
+              class="flex-none mt-1 transition-transform duration-300 group-hover:translate-x-1 group-hover:-rotate-45"
+              width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--electric)" stroke-width="1.8"
+              stroke-linecap="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+          <a href="#contact"
+            class="group flex items-start gap-4 sm:gap-6 py-5 sm:py-6 border-t transition-all duration-300 hover:pl-2"
+            style="border-color:var(--line)">
+            <span class="font-mono text-[10.5px] pt-1 w-16 sm:w-20 flex-none" style="color:var(--ink-2)">JUL 2026</span>
+            <div class="flex-1">
+              <p class="font-mono text-[9.5px] uppercase tracking-[0.18em] mb-1" style="color:var(--electric)">
+                Governance</p>
+              <h3 class="font-display text-lg sm:text-xl leading-snug group-hover:italic transition-all">Why succession
+                planning fails at board level — and the cadence that fixes it.</h3>
+            </div>
+            <svg
+              class="flex-none mt-1 transition-transform duration-300 group-hover:translate-x-1 group-hover:-rotate-45"
+              width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--electric)" stroke-width="1.8"
+              stroke-linecap="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+          <a href="#contact"
+            class="group flex items-start gap-4 sm:gap-6 py-5 sm:py-6 border-t border-b transition-all duration-300 hover:pl-2"
+            style="border-color:var(--line)">
+            <span class="font-mono text-[10.5px] pt-1 w-16 sm:w-20 flex-none" style="color:var(--ink-2)">JUN 2026</span>
+            <div class="flex-1">
+              <p class="font-mono text-[9.5px] uppercase tracking-[0.18em] mb-1" style="color:var(--electric)">M&A
+                Integration</p>
+              <h3 class="font-display text-lg sm:text-xl leading-snug group-hover:italic transition-all">The post-merger
+                culture ledger: measuring what actually determines deal synergy.</h3>
+            </div>
+            <svg
+              class="flex-none mt-1 transition-transform duration-300 group-hover:translate-x-1 group-hover:-rotate-45"
+              width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--electric)" stroke-width="1.8"
+              stroke-linecap="round">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+          <div class="mt-auto pt-6 flex items-center gap-3">
+            <span class="chip text-[10px]">240+ whitepapers</span>
+            <span class="chip text-[10px]">Leadership index</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     14 · Partner Availability Callout Band
+     ============================================================ -->
+  <section id="start" class="relative py-16 sm:py-24 lg:py-32 overflow-hidden scroll-mt-24"
+    style="background:var(--navy);color:#F5F0E6">
+    <div class="absolute inset-0 pointer-events-none"
+      style="background:radial-gradient(700px 420px at 50% 110%,var(--glow) 0%,transparent 60%)"></div>
+    <svg class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-[0.14]" width="680" height="680"
+      viewBox="0 0 760 760" fill="none" aria-hidden="true">
+      <g class="orbit-spin">
+        <circle cx="380" cy="380" r="340" stroke="rgba(245,240,230,.5)" stroke-dasharray="2 10" />
+        <circle cx="380" cy="40" r="8" fill="var(--cyan)" />
+      </g>
+      <g class="orbit-spin-rev">
+        <circle cx="380" cy="380" r="240" stroke="rgba(245,240,230,.4)" stroke-dasharray="2 8" />
+        <circle cx="620" cy="380" r="6" fill="var(--electric)" />
+      </g>
+    </svg>
+    <div class="wrap relative text-center">
+      <p class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.3em] text-ivory/50" data-reveal>Average
+        partner response time — 4 hours</p>
+      <h2 class="font-display font-light text-[clamp(2.5rem,6.5vw,6rem)] leading-[0.98] mt-4 sm:mt-5" data-reveal>
+        <span class="mask-line"><span class="mask-inner">Ready when</span></span>
+        <span class="mask-line"><span class="mask-inner italic" style="color:var(--cyan)">you are.</span></span>
+      </h2>
+      <div class="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4" data-reveal>
+        <a href="#contact" class="btn btn-primary !px-7 sm:!px-9 !py-3.5 sm:!py-4 w-full sm:w-auto" data-magnetic
+          data-cursor data-cursor-text="Start"><span class="btn-sheen"></span>Book a confidential briefing
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+        <a href="mailto:hello@hirelyconsultants.com"
+          class="btn btn-ghost !text-ivory !px-6 sm:!px-8 !py-3.5 sm:!py-4 w-full sm:w-auto"
+          style="border-color:rgba(245,240,230,.3)" data-magnetic>hello@hirelyconsultants.com</a>
+      </div>
+      <div
+        class="mt-10 sm:mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.18em] text-ivory/45"
+        data-reveal>
+        <span>New York <span class="office-clock text-ivory/75" data-tz="America/New_York">--:--</span></span>
+        <span>London <span class="office-clock text-ivory/75" data-tz="Europe/London">--:--</span></span>
+        <span>Dubai <span class="office-clock text-ivory/75" data-tz="Asia/Dubai">--:--</span></span>
+        <span>Singapore <span class="office-clock text-ivory/75" data-tz="Asia/Singapore">--:--</span></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     15 · Contact & Engagement Intake
+     ============================================================ -->
+  <section id="contact" class="py-16 sm:py-24 lg:py-36 scroll-mt-24 relative overflow-hidden">
+    <span class="ghost-num font-display absolute -left-4 bottom-0 text-[18vw] leading-none select-none hidden lg:block"
+      data-parallax="0.05">CONTACT</span>
+    <div class="wrap grid lg:grid-cols-12 gap-10 lg:gap-14 relative">
+      <div class="lg:col-span-6">
+        <p class="eyebrow" data-reveal>12 — Direct Inquiry</p>
+        <h2 class="font-display font-light text-[clamp(2.1rem,4.2vw,3.8rem)] leading-[1.04] mt-4 sm:mt-5" data-reveal>
+          Tell us where<br>it <em class="italic" style="color:var(--royal)">hurts</em>.</h2>
+        <p class="mt-4 sm:mt-5 max-w-md text-[14.5px] sm:text-[15.5px] leading-relaxed" style="color:var(--ink-2)"
+          data-reveal>No pitch theatrics. A senior partner reviews every intake directly and responds personally —
+          typically within four hours.</p>
+
+        <div class="mt-8 sm:mt-10 space-y-6" data-reveal>
+          <a href="mailto:hello@hirelyconsultants.com" class="group block">
+            <p class="font-mono text-[9.5px] uppercase tracking-[0.22em] mb-1" style="color:var(--ink-2)">Direct Partner
+              Inbox</p>
+            <p class="font-display text-xl sm:text-2xl underline decoration-[1.5px] underline-offset-6 transition-colors duration-300 group-hover:decoration-[var(--electric)]"
+              style="text-decoration-color:var(--line-strong)">hello@hirelyconsultants.com</p>
+          </a>
+          <div class="grid sm:grid-cols-2 gap-5 sm:gap-6">
+            <div>
+              <p class="font-mono text-[9.5px] uppercase tracking-[0.22em] mb-1" style="color:var(--ink-2)">24/7 Global
+                Line</p>
+              <p class="font-semibold text-base sm:text-lg">+1 (212) 555-0148</p>
+            </div>
+            <div>
+              <p class="font-mono text-[9.5px] uppercase tracking-[0.22em] mb-1" style="color:var(--ink-2)">Headquarters
+              </p>
+              <p class="font-semibold text-base sm:text-lg leading-snug">350 Fifth Avenue, Suite 4810<br>New York, NY
+                10118</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap items-center gap-2.5 pt-2">
+            <span class="chip text-[10px]"><span class="w-1.5 h-1.5 rounded-full pulse-dot"
+                style="background:var(--cyan)"></span>NDA on request</span>
+            <span class="chip text-[10px]">Board clearance</span>
+            <span class="chip text-[10px]">Conflict-checked in 24h</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-6" data-reveal>
+        <div class="card-surface p-6 sm:p-8 lg:p-9 shadow-soft relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1"
+            style="background:linear-gradient(90deg,var(--royal),var(--cyan))"></div>
+          <form id="contact-form" novalidate>
+            <div class="grid sm:grid-cols-2 gap-x-6 gap-y-5 sm:gap-y-6">
+              <div><label class="font-mono text-[9.5px] uppercase tracking-[0.2em] block mb-1"
+                  style="color:var(--ink-2)" for="f-name">Full name *</label><input id="f-name" class="input-field"
+                  type="text" placeholder="Alexandra Reyes" required autocomplete="name"></div>
+              <div><label class="font-mono text-[9.5px] uppercase tracking-[0.2em] block mb-1"
+                  style="color:var(--ink-2)" for="f-email">Work email *</label><input id="f-email" class="input-field"
+                  type="email" placeholder="a.reyes@company.com" required autocomplete="email"></div>
+              <div><label class="font-mono text-[9.5px] uppercase tracking-[0.2em] block mb-1"
+                  style="color:var(--ink-2)" for="f-company">Company or Fund</label><input id="f-company"
+                  class="input-field" type="text" placeholder="Organization" autocomplete="organization"></div>
+              <div>
+                <label class="font-mono text-[9.5px] uppercase tracking-[0.2em] block mb-1" style="color:var(--ink-2)"
+                  for="f-topic">Practice Area</label>
+                <select id="f-topic" class="input-field appearance-none" style="background:transparent">
+                  <option style="color:#171A20">Cross-Border Recruitment</option>
+                  <option style="color:#171A20">Executive Search</option>
+                  <option style="color:#171A20">Leadership Advisory</option>
+                  <option style="color:#171A20">Business Strategy</option>
+                  <option style="color:#171A20">Digital & AI Transformation</option>
+                  <option style="color:#171A20">Organizational Design</option>
+                  <option style="color:#171A20">M&A Integration</option>
+                  <option style="color:#171A20">Other Advisory</option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-5 sm:mt-6"><label class="font-mono text-[9.5px] uppercase tracking-[0.2em] block mb-1"
+                style="color:var(--ink-2)" for="f-msg">The Situation *</label><textarea id="f-msg" rows="3"
+                class="input-field resize-none"
+                placeholder="What is the critical decision on the table, and what is your required timeline?"
+                required></textarea></div>
+            <div class="mt-6 sm:mt-7 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-5">
+              <button type="submit" class="btn btn-primary w-full sm:w-auto !py-3" data-magnetic><span
+                  class="btn-sheen"></span>Send to Partner
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                  stroke-linecap="round">
+                  <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg>
+              </button>
+              <p class="font-mono text-[9.5px] uppercase tracking-[0.16em] leading-relaxed" style="color:var(--ink-2)">
+                Direct partner review.<br>Response within one business day.</p>
+            </div>
+          </form>
+          <div id="form-success" class="hidden text-center py-10 sm:py-12">
+            <span class="mx-auto w-14 h-14 rounded-full flex items-center justify-center"
+              style="background:var(--cyan-soft)">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--electric)" stroke-width="2.2"
+                stroke-linecap="round">
+                <path d="m4.5 12.5 5 5 10-11" />
+              </svg>
+            </span>
+            <p class="font-display text-2xl mt-4">Inquiry Received.</p>
+            <p class="mt-2 text-[14px] max-w-sm mx-auto" style="color:var(--ink-2)">A partner will reply personally
+              within one business day. For urgent matters, call <strong style="color:var(--ink)">+1 (212)
+                555-0148</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+     16 · Global Footer
+     ============================================================ -->
+  <footer class="relative pt-16 sm:pt-20 pb-8 overflow-hidden" style="background:var(--bg-2)">
+    <div class="wrap">
+      <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center border-b pb-10 sm:pb-12"
+        style="border-color:var(--line)">
+        <div class="lg:col-span-6">
+          <p class="font-display text-xl sm:text-2xl">The Hirely Brief.</p>
+          <p class="text-[13.5px] sm:text-[14px] mt-1.5 max-w-md" style="color:var(--ink-2)">One concise monthly
+            synthesis on leadership, strategic execution and cross-border operations. Read by 28,000 leaders.</p>
+        </div>
+        <form id="news-form" class="lg:col-span-6 flex flex-col sm:flex-row gap-2.5">
+          <input type="email" required placeholder="your@work-email.com"
+            class="input-field flex-1 !border rounded-lg px-4 py-2.5"
+            style="border-color:var(--line-strong);border-width:1px" aria-label="Email for monthly newsletter">
+          <button class="btn btn-primary flex-none !px-5 !py-2.5 text-xs" data-magnetic type="submit"><span
+              class="btn-sheen"></span>Subscribe</button>
+        </form>
+      </div>
+
+      <!-- Background Brand Watermark -->
+      <div class="py-8 select-none" aria-hidden="true">
+        <p
+          class="font-display font-semibold leading-none text-center text-[16vw] lg:text-[12rem] tracking-tight text-stroke-soft opacity-50 whitespace-nowrap">
+          HIRELY<span style="-webkit-text-stroke:0;color:var(--electric)">.</span></p>
+      </div>
+
+      <!-- Navigation Columns Grid -->
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 pb-10">
+        <div class="col-span-2 md:col-span-4 lg:col-span-1">
+          <a href="#top" class="flex items-center gap-2">
+            <svg width="24" height="24" viewBox="0 0 64 64">
+              <rect width="64" height="64" rx="14" fill="var(--navy)" />
+              <path d="M20 14v36M44 14v36M20 32h24" stroke="var(--electric)" stroke-width="6" stroke-linecap="round" />
+              <circle cx="44" cy="14" r="5" fill="var(--cyan)" />
+            </svg>
+            <span class="font-display text-base font-semibold">Hirely Consultants</span>
+          </a>
+          <p class="text-[12.5px] leading-relaxed mt-3 max-w-[220px]" style="color:var(--ink-2)">Global business
+            consultancy. Strategy, leadership and talent across 32 countries.</p>
+          <div class="flex gap-2.5 mt-5">
+            <a href="#" aria-label="LinkedIn"
+              class="w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 hover:!border-[var(--electric)] hover:text-[var(--electric)]"
+              style="border-color:var(--line-strong)"><svg width="13" height="13" viewBox="0 0 24 24"
+                fill="currentColor">
+                <path
+                  d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5ZM.24 8.31h4.52V23H.24V8.31Zm7.44 0h4.33v2h.06c.6-1.14 2.08-2.34 4.28-2.34 4.57 0 5.42 3.01 5.42 6.92V23h-4.52v-7.1c0-1.7-.03-3.88-2.36-3.88-2.37 0-2.73 1.85-2.73 3.76V23H7.68V8.31Z" />
+              </svg></a>
+            <a href="#" aria-label="X"
+              class="w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 hover:!border-[var(--electric)] hover:text-[var(--electric)]"
+              style="border-color:var(--line-strong)"><svg width="12" height="12" viewBox="0 0 24 24"
+                fill="currentColor">
+                <path
+                  d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.46l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93Zm-1.29 19.5h2.04L6.49 3.24H4.3l13.31 17.41Z" />
+              </svg></a>
+            <a href="#" aria-label="YouTube"
+              class="w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 hover:!border-[var(--electric)] hover:text-[var(--electric)]"
+              style="border-color:var(--line-strong)"><svg width="14" height="14" viewBox="0 0 24 24"
+                fill="currentColor">
+                <path
+                  d="M23.5 6.2a3 3 0 0 0-2.12-2.13C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.52A3 3 0 0 0 .5 6.2 31.3 31.3 0 0 0 0 12a31.3 31.3 0 0 0 .5 5.8 3 3 0 0 0 2.12 2.13c1.88.52 9.38.52 9.38.52s7.5 0 9.38-.52a3 3 0 0 0 2.12-2.13A31.3 31.3 0 0 0 24 12a31.3 31.3 0 0 0-.5-5.8ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z" />
+              </svg></a>
+          </div>
+        </div>
+        <nav aria-label="Company Links">
+          <p class="font-mono text-[9.5px] uppercase tracking-[0.22em] mb-4" style="color:var(--ink-2)">Company</p>
+          <ul class="space-y-2.5 text-[13px] font-medium">
+            <li><a href="#firm" class="transition-colors hover:text-[var(--electric)]">The Firm</a></li>
+            <li><a href="#method" class="transition-colors hover:text-[var(--electric)]">The Method</a></li>
+            <li><a href="#work" class="transition-colors hover:text-[var(--electric)]">Outcomes</a></li>
+            <li><a href="#voices" class="transition-colors hover:text-[var(--electric)]">Clients</a></li>
+            <li><a href="#contact" class="transition-colors hover:text-[var(--electric)]">Contact</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Expertise Links">
+          <p class="font-mono text-[9.5px] uppercase tracking-[0.22em] mb-4" style="color:var(--ink-2)">Expertise</p>
+          <ul class="space-y-2.5 text-[13px] font-medium">
+            <li><a href="#svc-recruitment" class="transition-colors hover:text-[var(--electric)]">Recruitment
+                Support</a></li>
+            <li><a href="#challenges" class="transition-colors hover:text-[var(--electric)]">Executive Search</a></li>
+            <li><a href="#challenges" class="transition-colors hover:text-[var(--electric)]">Leadership Advisory</a>
+            </li>
+            <li><a href="#challenges" class="transition-colors hover:text-[var(--electric)]">Business Strategy</a></li>
+            <li><a href="#svc-outsourcing" class="transition-colors hover:text-[var(--electric)]">Global Staffing</a>
+            </li>
+          </ul>
+        </nav>
+        <nav aria-label="Office Locations">
+          <p class="font-mono text-[9.5px] uppercase tracking-[0.22em] mb-4" style="color:var(--ink-2)">Offices</p>
+          <ul class="space-y-2.5 text-[13px] font-medium">
+            <li><a href="#network" class="transition-colors hover:text-[var(--electric)]">New York — HQ</a></li>
+            <li><a href="#network" class="transition-colors hover:text-[var(--electric)]">London</a></li>
+            <li><a href="#network" class="transition-colors hover:text-[var(--electric)]">Dubai</a></li>
+            <li><a href="#network" class="transition-colors hover:text-[var(--electric)]">Singapore</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Direct Inquiries" class="col-span-2 md:col-span-4 lg:col-span-1">
+          <p class="font-mono text-[9.5px] uppercase tracking-[0.22em] mb-4" style="color:var(--ink-2)">Inquiries</p>
+          <ul class="space-y-2.5 text-[13px] font-medium">
+            <li><a href="mailto:hello@hirelyconsultants.com"
+                class="transition-colors hover:text-[var(--electric)]">hello@hirelyconsultants.com</a></li>
+            <li><a href="tel:+12125550148" class="transition-colors hover:text-[var(--electric)]">+1 (212) 555-0148</a>
+            </li>
+            <li><a href="#insights" class="transition-colors hover:text-[var(--electric)]">Insights Library</a></li>
+            <li><a href="#contact" class="transition-colors hover:text-[var(--electric)]">Book Briefing</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Bottom Copyright & Legal -->
+      <div
+        class="flex flex-col md:flex-row items-center justify-between gap-3 border-t pt-6 font-mono text-[9.5px] sm:text-[10px] uppercase tracking-[0.16em]"
+        style="border-color:var(--line);color:var(--ink-2)">
+        <p>© <span id="year">2026</span> Hirely Consultants LLC — All rights reserved</p>
+        <div class="flex gap-5">
+          <a href="#" class="hover:text-[var(--electric)] transition-colors">Privacy</a>
+          <a href="#" class="hover:text-[var(--electric)] transition-colors">Terms</a>
+          <a href="#" class="hover:text-[var(--electric)] transition-colors">Security</a>
+        </div>
+        <p>New York · London · Dubai · Singapore</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-Top Action Floating Button -->
+  <button id="to-top" data-magnetic aria-label="Back to top"
+    class="fixed bottom-5 right-5 z-[70] w-10 h-10 sm:w-11 sm:h-11 rounded-full border flex items-center justify-center opacity-0 translate-y-4 pointer-events-none transition-all duration-500 shadow-soft"
+    style="background:var(--surface);border-color:var(--line-strong)">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--electric)" stroke-width="2.2"
+      stroke-linecap="round">
+      <path d="M12 19V5M6 11l6-6 6 6" />
+    </svg>
+  </button>
+
+  <!-- System Confirmation Toast Message -->
+  <div id="toast"
+    class="fixed bottom-5 left-5 z-[95] translate-y-24 opacity-0 transition-all duration-500 card-surface px-5 py-3.5 shadow-lift flex items-center gap-3 max-w-[90vw]">
+    <span class="w-2 h-2 rounded-full pulse-dot flex-none" style="background:var(--cyan)"></span>
+    <p id="toast-msg" class="text-[13px] font-semibold">Done.</p>
+  </div>
+
+  <!-- Main Script -->
+  <script src="./src/scripts/main.js"></script>
+
+</body>
+
+</html>
